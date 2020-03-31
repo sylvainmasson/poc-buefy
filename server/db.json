@@ -36,10 +36,10 @@
       "civilite": "M.",
       "nom": "Freard",
       "prenom": "Stéphane",
-      "housenumber": "5",
-      "street": "Rue des néfliers",
-      "complement": "",
-      "postcode": "44690",
+      "housenumber": "11",
+      "street": "Rue Henri Cochard",
+      "complement": null,
+      "postcode": "44000",
       "citycode": "44070",
       "city": "Nantes",
       "telephonenumber": "",
@@ -48,7 +48,8 @@
       "entreprise": {
         "siret": "79824895100021",
         "libelle": "Pickles"
-      }
+      },
+      "codeCommune": "44109"
     },
     {
       "civilite": "M.",
@@ -57,7 +58,29 @@
       "email": "steven.boivin@loire-atlantique.fr",
       "birthdate": "1999-01-01",
       "id": 3,
-      "entreprise": {}
+      "entreprise": {},
+      "postcode": "44690",
+      "city": "La Haie-Fouassière",
+      "codeCommune": "44070",
+      "street": "Rue des Néfliers",
+      "housenumber": "5",
+      "complement": null
+    },
+    {
+      "entreprise": {},
+      "civilite": "Mme",
+      "nom": "Lempereur",
+      "prenom": "Cécile",
+      "email": "cecile.lempereur@loire-atlantique.fr",
+      "telephonenumber": "0240991000",
+      "birthdate": "1975-01-01",
+      "postcode": "44300",
+      "city": "Nantes",
+      "codeCommune": "44109",
+      "street": "Avenue des Antilopes",
+      "housenumber": "8",
+      "complement": null,
+      "id": 4
     }
   ],
   "comments": [
