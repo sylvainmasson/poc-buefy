@@ -1,0 +1,73 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "civilite": "M.",
+      "nom": "Masson",
+      "prenom": "Sylvain",
+      "housenumber": "5",
+      "street": "Rue des néfliers",
+      "complement": "",
+      "postcode": "44690",
+      "citycode": "44070",
+      "city": "La Haie Fouassiere",
+      "telephonenumber": "0676634668",
+      "email": "sylvain.masson@loire-atlantique.fr",
+      "birthdate": "1980-10-02",
+      "entreprise": {
+        "siret": "22440002800011",
+        "libelle": "Département de Loire Atlantique"
+      }
+    },
+    {
+      "id": 2,
+      "civilite": "M.",
+      "nom": "Freard",
+      "prenom": "Stéphane",
+      "housenumber": "5",
+      "street": "Rue des néfliers",
+      "complement": "",
+      "postcode": "44690",
+      "citycode": "44070",
+      "city": "Nantes",
+      "telephonenumber": "",
+      "email": "stephane.freard@loire-atlantique.fr",
+      "birthdate": "1972-07-18",
+      "entreprise": {
+        "siret": "79824895100021",
+        "libelle": "Pickles"
+      }
+    },
+    {
+      "civilite": "M.",
+      "nom": "Boivin",
+      "prenom": "Steven",
+      "email": "steven.boivin@loire-atlantique.fr",
+      "birthdate": "1999-01-01",
+      "id": 3,
+      "entreprise": {}
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
