@@ -38,6 +38,7 @@
         </b-field>
         <field-adresse :label="adresse"
           :required="true"
+          :showMap="true"
           @select="select">
         </field-adresse>
         <form-footer :routeRetour="routeRetour" :changement="changement"/>
@@ -45,7 +46,6 @@
       </form>
     </div>
   </div>
-
 </div>
 </template>
 
@@ -100,22 +100,28 @@ export default {
       return adresseLabel
     },
     select (item) {
-      this.adresse = item.properties.label
-      this.client.postcode = item.properties.postcode
-      this.client.city = item.properties.city
-      this.client.codeCommune = item.properties.citycode
-      if (item.properties.type === 'housenumber') {
-        this.client.street = item.properties.street
-        this.client.housenumber = item.properties.housenumber
-        this.client.complement = null
-      } else if (item.properties.type === 'street') {
-        this.client.street = item.properties.name
-        this.client.housenumber = null
-        this.client.complement = null
-      } else if (item.properties.type === 'locality') {
-        this.client.complement = item.properties.name
-        this.client.housenumber = null
-        this.client.street = null
+      if (item) {
+        this.adresse = item.properties.label
+        this.client.postcode = item.properties.postcode
+        this.client.city = item.properties.city
+        this.client.codeCommune = item.properties.citycode
+        if (item.properties.type === 'housenumber') {
+          this.client.street = item.properties.street
+          this.client.housenumber = item.properties.housenumber
+          this.client.complement = null
+        } else if (item.properties.type === 'street') {
+          this.client.street = item.properties.name
+          this.client.housenumber = null
+          this.client.complement = null
+        } else if (item.properties.type === 'locality') {
+          this.client.complement = item.properties.name
+          this.client.housenumber = null
+          this.client.street = null
+        } else if (item.properties.type === 'municipality') {
+          this.client.complement = null
+          this.client.housenumber = null
+          this.client.street = null
+        }
       }
     },
     submit (event) {

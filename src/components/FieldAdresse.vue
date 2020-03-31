@@ -1,4 +1,5 @@
 <template>
+  <section style="margin-bottom: 12px;" >
   <b-field label="Adresse *" horizontal>
     <b-autocomplete
       id="adresse"
@@ -11,12 +12,18 @@
       field="properties.label"
       @select="select"
       @input="search"
-      :required="required">
+      :required="required"
+      clearable>
     </b-autocomplete>
   </b-field>
+  <b-field label="" horizontal v-if="showMap">
+    <map-marker :coordonnees="coordonnees"></map-marker>
+  </b-field>
+  </section>
 </template>
 
 <script>
+import MapMarker from '@/components/MapMarker'
 import BanService from '../services/BanService'
 
 export default {
@@ -28,35 +35,62 @@ export default {
     required: {
       Boolean,
       required: true
+    },
+    showMap: {
+      Boolean,
+      required: true
     }
   },
   data () {
     return {
       adresses: [],
+      coordonnees: [],
       labelLocal: null
     }
   },
   methods: {
     search (term) {
-      BanService.searchAdresse(term)
-        .then((response) => {
-          if (response.data) {
-            this.adresses = response.data.features
-          }
-        })
+      if ((term) && (term.length > 2)) {
+        BanService.searchAdresse(term)
+          .then((response) => {
+            if (response.data) {
+              this.adresses = response.data.features
+            }
+          })
+      }
     },
     select (item) {
+      if (item) {
+        this.setCoordonnees(item)
+      }
       this.$emit('select', item)
+    },
+    setCoordonnees (adresse) {
+      if ((adresse.geometry) && (adresse.geometry.coordinates) && (adresse.geometry.coordinates[0]) && (adresse.geometry.coordinates[1])) {
+        this.coordonnees = []
+        this.coordonnees.push(adresse.geometry.coordinates[1])
+        this.coordonnees.push(adresse.geometry.coordinates[0])
+      }
     }
-  },
-  created () {
-    console.log('mounted')
-    this.labelLocal = this.label
   },
   watch: {
     label: function () {
       this.labelLocal = this.label
+      if ((this.coordonnees) && (this.coordonnees.length === 0)) {
+        BanService.getAdresse(this.labelLocal)
+          .then((response) => {
+            if (response.data) {
+              if (response.data.features) {
+                var adresse = response.data.features[0]
+                this.setCoordonnees(adresse)
+              }
+            }
+          })
+      }
     }
+  },
+  components: {
+    MapMarker
   }
 }
 </script>

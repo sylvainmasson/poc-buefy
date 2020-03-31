@@ -9,6 +9,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'buefy/dist/buefy.css'
 // import 'bulma/css/bulma.min.css'
 // import '@/assets/css/appli.css'
+
+// Composant applicatif
 import EmptySlot from '@/components/EmptySlot'
 import TabHeader from '@/components/TabHeader'
 import ActionButton from '@/components/ActionButton'
