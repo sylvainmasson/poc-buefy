@@ -1,5 +1,5 @@
 <template>
-  <section style="margin-bottom: 12px;" >
+  <div class="field">
   <b-field label="Adresse *" horizontal>
     <b-autocomplete
       id="adresse"
@@ -19,7 +19,7 @@
   <b-field label="" horizontal v-if="showMap">
     <map-marker :coordonnees="coordonnees"></map-marker>
   </b-field>
-  </section>
+  </div>
 </template>
 
 <script>

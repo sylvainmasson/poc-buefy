@@ -15,5 +15,8 @@ export default {
   },
   deleteClient (id) {
     return Vue.axios.delete(`clients/${id}`)
+  },
+  searchClient (term) {
+    return Vue.axios.get(`clients?nom_like=${term}`)
   }
 }

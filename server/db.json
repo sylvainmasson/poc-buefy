@@ -17,12 +17,12 @@
       "civilite": "M.",
       "nom": "Masson",
       "prenom": "Sylvain",
-      "housenumber": null,
-      "street": null,
-      "complement": "Le Chiron des Landes",
-      "postcode": "85660",
+      "housenumber": "5",
+      "street": "Rue des Néfliers",
+      "complement": null,
+      "postcode": "44690",
       "citycode": "44070",
-      "city": "Saint-Philbert-de-Bouaine",
+      "city": "La Haie-Fouassière",
       "telephonenumber": "0676634668",
       "email": "sylvain.masson@loire-atlantique.fr",
       "birthdate": "1980-10-02",
@@ -30,7 +30,7 @@
         "siret": "22440002800011",
         "libelle": "Département de Loire Atlantique"
       },
-      "codeCommune": "85262"
+      "codeCommune": "44070"
     },
     {
       "id": 2,
@@ -60,11 +60,11 @@
       "birthdate": "1999-01-01",
       "id": 3,
       "entreprise": {},
-      "postcode": "44000",
+      "postcode": "44200",
       "city": "Nantes",
       "codeCommune": "44109",
-      "street": "Rue du Port au Vin",
-      "housenumber": "5",
+      "street": "Boulevard Vincent Gâche",
+      "housenumber": null,
       "complement": null
     },
     {
@@ -81,7 +81,13 @@
       "street": "Avenue des Antilopes",
       "housenumber": "8",
       "complement": null,
-      "id": 4
+      "id": 4,
+      "contacts": [
+        {
+          "id": 2,
+          "nomComplet": "Freard Stéphane"
+        }
+      ]
     },
     {
       "entreprise": {},
@@ -96,7 +102,21 @@
       "street": "Allée de la Rance",
       "housenumber": null,
       "complement": null,
-      "id": 5
+      "id": 5,
+      "contacts": [
+        {
+          "id": 4,
+          "nomComplet": "Lempereur Cécile"
+        },
+        {
+          "id": 1,
+          "nomComplet": "Masson Sylvain"
+        },
+        {
+          "id": 3,
+          "nomComplet": "Boivin Steven"
+        }
+      ]
     }
   ],
   "comments": [

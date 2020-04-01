@@ -41,6 +41,25 @@
           :showMap="true"
           @select="select">
         </field-adresse>
+        <b-field label="Contacts" horizontal>
+            <b-taginput
+                v-model="client.contacts"
+                :data="filteredContacts"
+                autocomplete
+                field="nomComplet"
+                icon="label"
+                placeholder="Ajouter un contact"
+                @typing="searchContact"
+                :before-adding="verificationDoublon">
+                <template slot="empty">
+                    <b-icon
+                      icon="emoticon-sad"
+                      size="is-small">
+                    </b-icon>
+                    <span>Pas de résultat</span>
+                </template>
+            </b-taginput>
+        </b-field>
         <form-footer :routeRetour="routeRetour" :changement="changement"/>
       </section>
       </form>
@@ -57,6 +76,7 @@ export default {
   data () {
     return {
       client: {},
+      filteredContacts: [],
       civilites: ['M.', 'Mme'],
       libelleEnTete: '',
       libelleCreation: 'Ajout d\'un client',
@@ -123,6 +143,27 @@ export default {
           this.client.street = null
         }
       }
+    },
+    searchContact (term) {
+      ClientService.searchClient(term)
+        .then((response) => {
+          const clients = response.data
+          this.filteredContacts = clients.filter(client => client.id !== this.client.id).map(client => {
+            return {
+              id: client.id,
+              nomComplet: `${client.nom} ${client.prenom}`
+            }
+          })
+        })
+    },
+    verificationDoublon (item) {
+      let retour = true
+      this.client.contacts.forEach(function (client) {
+        if (client.id === item.id) {
+          retour = false
+        }
+      })
+      return retour
     },
     submit (event) {
       event.preventDefault()

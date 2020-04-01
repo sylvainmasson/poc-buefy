@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// Gestion des cartes
+
 import L from 'leaflet'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -49,15 +49,12 @@ export default {
   .leaflet-pane {
     z-index : auto !important;
   }
-
 .leaflet-marker-pane {
     z-index : 600 !important;
   }
-
 .leaflet-top, .leaflet-bottom {
     z-index : auto !important;
   }
-
 .leaflet-control {
   z-index : auto !important;
 }
