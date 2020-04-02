@@ -17,14 +17,14 @@
       </b-autocomplete>
     </b-field>
     <b-field label="" horizontal v-if="showMap">
-      <map-marker :coordonnees="adresseLocal.coordonnees"></map-marker>
+      <map-marker :coordonnees="adresseLocal.coordonnees" height="300px"></map-marker>
     </b-field>
   </div>
 </template>
 
 <script>
 import MapMarker from '@/components/MapMarker'
-import BanService from '../services/BanService'
+import AdresseService from '../services/AdresseService'
 
 export default {
   name: 'FieldAdresse',
@@ -54,7 +54,7 @@ export default {
   methods: {
     search (term) {
       if ((term) && (term.length > 2)) {
-        BanService.searchAdresse(term)
+        AdresseService.searchAdresse(term)
           .then((response) => {
             if (response.data) {
               this.adresses = response.data.features
@@ -95,31 +95,12 @@ export default {
         this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[1])
         this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[0])
       }
-    },
-    setAdresse (adresse) {
-      var adresseLabel = ''
-      if (this.adresseLocal.numero) {
-        adresseLabel += this.adresseLocal.numero
-      }
-      if (this.adresseLocal.libelleVoie) {
-        adresseLabel += ' ' + this.adresseLocal.libelleVoie
-      }
-      if (this.adresseLocal.lieuDit) {
-        adresseLabel += ' ' + this.adresseLocal.lieuDit
-      }
-      if (this.adresseLocal.codePostal) {
-        adresseLabel += ' ' + this.adresseLocal.codePostal
-      }
-      if (this.adresseLocal.commune) {
-        adresseLabel += ' ' + this.adresseLocal.commune
-      }
-      return adresseLabel
     }
   },
   watch: {
     adresse: function () {
       this.adresseLocal = this.adresse
-      this.label = this.setAdresse(this.adresseLocal)
+      this.label = AdresseService.setAdresseLabel(this.adresseLocal)
     }
   },
   components: {

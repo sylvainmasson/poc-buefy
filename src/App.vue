@@ -78,4 +78,8 @@ export default {
   height: 50px;
   margin: 3px;
 }
+
+.dropdown-menu {
+  z-index: 50 !important;
+}
 </style>
