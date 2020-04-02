@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "db": "cd server && json-server --watch db.json"
+    "db": "cd server && npm install && json-server index.js"
   },
   "dependencies": {
     "@mdi/font": "^5.0.45",

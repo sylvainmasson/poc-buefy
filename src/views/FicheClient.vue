@@ -77,7 +77,7 @@ export default {
     return {
       client: {},
       filteredContacts: [],
-      civilites: ['M.', 'Mme'],
+      civilites: ['M', 'Mme'],
       libelleEnTete: '',
       libelleCreation: 'Ajout d\'un client',
       libelleModification: 'Modification du client',
