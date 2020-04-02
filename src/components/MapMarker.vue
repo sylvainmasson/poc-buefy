@@ -1,5 +1,5 @@
 <template>
-  <section v-if="coordonnees.length > 0">
+  <section v-if="(coordonnees) && (coordonnees.length > 0)">
     <l-map style="height: 300px" :zoom="zoom" :center="coordonnees">
       <l-tile-layer  :url="url"></l-tile-layer>
       <l-marker :lat-lng="coordonnees"></l-marker>

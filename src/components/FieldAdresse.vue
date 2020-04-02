@@ -1,24 +1,24 @@
 <template>
   <div class="field">
-  <b-field label="Adresse *" horizontal>
-    <b-autocomplete
-      id="adresse"
-      v-model="labelLocal"
-      placeholder="Saisissez le début de votre adresse. Exemple : 11 rue Henri Cochard 44000 Nantes"
-      icon="magnify"
-      :keep-first="true"
-      :open-on-focus="true"
-      :data="adresses"
-      field="properties.label"
-      @select="select"
-      @input="search"
-      :required="required"
-      clearable>
-    </b-autocomplete>
-  </b-field>
-  <b-field label="" horizontal v-if="showMap">
-    <map-marker :coordonnees="coordonnees"></map-marker>
-  </b-field>
+    <b-field label="Adresse *" horizontal>
+      <b-autocomplete
+        id="adresse"
+        v-model="label"
+        placeholder="Saisissez le début de votre adresse. Exemple : 11 rue Henri Cochard 44000 Nantes"
+        icon="magnify"
+        :keep-first="true"
+        :open-on-focus="true"
+        :data="adresses"
+        field="properties.label"
+        @select="select"
+        @input="search"
+        :required="required"
+        clearable>
+      </b-autocomplete>
+    </b-field>
+    <b-field label="" horizontal v-if="showMap">
+      <map-marker :coordonnees="adresseLocal.coordonnees"></map-marker>
+    </b-field>
   </div>
 </template>
 
@@ -29,8 +29,9 @@ import BanService from '../services/BanService'
 export default {
   name: 'FieldAdresse',
   props: {
-    label: {
-      String
+    adresse: {
+      Object,
+      required: true
     },
     required: {
       Boolean,
@@ -44,8 +45,10 @@ export default {
   data () {
     return {
       adresses: [],
-      coordonnees: [],
-      labelLocal: null
+      label: null,
+      adresseLocal: {
+        cordonnees: []
+      }
     }
   },
   methods: {
@@ -61,32 +64,62 @@ export default {
     },
     select (item) {
       if (item) {
+        this.label = item.properties.label
+        this.adresseLocal.codePostal = item.properties.postcode
+        this.adresseLocal.commune = item.properties.city
+        this.adresseLocal.codeCommune = item.properties.citycode
+        if (item.properties.type === 'housenumber') {
+          this.adresseLocal.libelleVoie = item.properties.street
+          this.adresseLocal.numero = item.properties.housenumber
+          this.adresseLocal.lieuDit = null
+        } else if (item.properties.type === 'street') {
+          this.adresseLocal.libelleVoie = item.properties.name
+          this.adresseLocal.numero = null
+          this.adresseLocal.lieuDit = null
+        } else if (item.properties.type === 'locality') {
+          this.adresseLocal.lieuDit = item.properties.name
+          this.adresseLocal.numero = null
+          this.adresseLocal.libelleVoie = null
+        } else if (item.properties.type === 'municipality') {
+          this.adresseLocal.lieuDit = null
+          this.adresseLocal.numero = null
+          this.adresseLocal.libelleVoie = null
+        }
         this.setCoordonnees(item)
       }
-      this.$emit('select', item)
+      this.$emit('select', this.adresseLocal)
     },
     setCoordonnees (adresse) {
       if ((adresse.geometry) && (adresse.geometry.coordinates) && (adresse.geometry.coordinates[0]) && (adresse.geometry.coordinates[1])) {
-        this.coordonnees = []
-        this.coordonnees.push(adresse.geometry.coordinates[1])
-        this.coordonnees.push(adresse.geometry.coordinates[0])
+        this.adresseLocal.coordonnees = []
+        this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[1])
+        this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[0])
       }
+    },
+    setAdresse (adresse) {
+      var adresseLabel = ''
+      if (this.adresseLocal.numero) {
+        adresseLabel += this.adresseLocal.numero
+      }
+      if (this.adresseLocal.libelleVoie) {
+        adresseLabel += ' ' + this.adresseLocal.libelleVoie
+      }
+      if (this.adresseLocal.lieuDit) {
+        adresseLabel += ' ' + this.adresseLocal.lieuDit
+      }
+      if (this.adresseLocal.codePostal) {
+        adresseLabel += ' ' + this.adresseLocal.codePostal
+      }
+      if (this.adresseLocal.commune) {
+        adresseLabel += ' ' + this.adresseLocal.commune
+      }
+      return adresseLabel
     }
   },
   watch: {
-    label: function () {
-      this.labelLocal = this.label
-      if ((this.coordonnees) && (this.coordonnees.length === 0)) {
-        BanService.getAdresse(this.labelLocal)
-          .then((response) => {
-            if (response.data) {
-              if (response.data.features) {
-                var adresse = response.data.features[0]
-                this.setCoordonnees(adresse)
-              }
-            }
-          })
-      }
+    adresse: function () {
+      this.adresseLocal = this.adresse
+      this.label = this.setAdresse(this.adresseLocal)
     }
   },
   components: {

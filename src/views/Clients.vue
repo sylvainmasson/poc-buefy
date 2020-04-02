@@ -33,7 +33,7 @@
               {{props.row.entreprise.libelle}}
             </b-table-column>
             <b-table-column field="city" label="Commune" sortable searchable>
-              {{props.row.city}}
+              {{props.row.adresse.commune}}
             </b-table-column>
             <b-table-column field="email" label="Email" searchable>
               <a v-bind:href="'mailto:' + props.row.email">

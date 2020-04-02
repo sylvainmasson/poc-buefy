@@ -1,10 +1,9 @@
-var faker = require('faker')
+var faker = require('faker/locale/fr')
 
 // index.js
 module.exports = () => {
-  faker.locale = "fr"
   const data = { clients: [] }
-  // Create 5000 users
+  // Create 2000 users
   for (var id = 0; id < 2000; id++) {
     data.clients.push({
       "id": id,
@@ -15,6 +14,17 @@ module.exports = () => {
       "birthdate": faker.date.past(30, new Date("1998-01-01")).toISOString().substring(0, 10),
       "telephonenumber": faker.phone.phoneNumberFormat(),
       "entreprise": {},
+      "adresse" : {
+        "localisationInterne" : null,
+        "construction": null,
+        "numero": "11",
+        "libelleVoie": "Rue Henri Cochard",
+        "lieuDit": null,
+        "codePostal": "44000",
+        "codeInsee": "44109",
+        "commune": "Nantes",
+        "coordonnees": [47.223392, -1.549853]
+      },
       "contacts" : []
     })
   }
