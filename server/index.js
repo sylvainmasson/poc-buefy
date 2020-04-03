@@ -2,7 +2,7 @@ var faker = require('faker/locale/fr')
 
 // index.js
 module.exports = () => {
-  const data = { clients: [] }
+  const data = { clients: [], avatars: [] }
   // Create 2000 users
   for (var id = 0; id < 500; id++) {
     data.clients.push({

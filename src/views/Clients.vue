@@ -17,7 +17,8 @@
                   aria-previous-label="Page précédente"
                   aria-page-label="Page"
                   aria-current-label="Page en cours"
-                  detailed>
+                  detailed
+                  @details-open="openDetails">
           <template slot-scope="props">
             <b-table-column field="id" label="ID" numeric sortable searchable width="100">
               {{props.row.id}}
@@ -53,9 +54,16 @@
           <template slot="detail" slot-scope="props">
             <article class="media">
               <figure class="media-left">
-                <p class="image is-64x64">
+                <p v-if="props.row.avatarId" class="image is-64x64">
+                  <img :src="avatar">
+                </p>
+                <p v-else-if="props.row.avatarUrl" class="image is-64x64">
                   <img v-bind:src="props.row.avatarUrl">
                 </p>
+                <b-icon v-else
+                  icon="account"
+                  size="is-large">
+                </b-icon>
               </figure>
               <div class="media-content">
                 <div class="content">
@@ -129,6 +137,7 @@ import ClientService from '../services/ClientService'
 import exportService from '@/services/ExportService'
 import MapMarker from '@/components/MapMarker'
 import AdresseService from '../services/AdresseService'
+import AvatarService from '../services/AvatarService'
 
 export default {
   name: 'Clients',
@@ -136,6 +145,7 @@ export default {
     return {
       clients: [],
       perPage: 15,
+      avatar: null,
       isLoading: false,
       isPaginated: false,
       isPaginationSimple: false,
@@ -193,6 +203,14 @@ export default {
         ClientService.deleteClient(client.id)
           .then((response) => {
             this.getClients()
+          })
+      }
+    },
+    openDetails (row) {
+      if (row.avatarId) {
+        AvatarService.getAvatar(row.avatarId)
+          .then((response) => {
+            this.avatar = 'data:image;base64,' + btoa(response.data.image)
           })
       }
     },

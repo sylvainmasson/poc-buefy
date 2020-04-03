@@ -8,6 +8,18 @@
     <div class="card-content">
       <form id="signUpForm" @submit.prevent="submit">
       <section>
+        <b-field label="Avatar"  v-if="image || client.avatarUrl" horizontal>
+          <img v-if="image" :src="image">
+          <img v-else :src="client.avatarUrl">
+        </b-field>
+        <b-field class="file" horizontal>
+          <b-upload v-model="file" accept="image/png, image/jpeg">
+              <a class="button is-primary">
+                  <b-icon icon="upload"></b-icon>
+                  <span>{{boutonAvatar}}</span>
+              </a>
+          </b-upload>
+        </b-field>
         <b-field label="Civilité *" horizontal>
             <b-select v-model="client.civilite" ref="civilite" required>
                 <option
@@ -71,6 +83,7 @@
 
 <script>
 import ClientService from '../services/ClientService'
+import AvatarService from '../services/AvatarService'
 
 export default {
   name: 'FicheClient',
@@ -89,6 +102,10 @@ export default {
       modification: false,
       changement: false,
       premierChargement: false,
+      file: null,
+      fileData: null,
+      boutonAvatar: "Ajouter l'avatar",
+      image: null,
       routeRetour: {
         name: 'Clients'
       }
@@ -101,6 +118,19 @@ export default {
           this.client = response.data
           this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
           this.modification = true
+          if ((this.client.avatarId) || (this.client.avatarUrl)) {
+            this.boutonAvatar = 'Mettre à jour l\'avatar'
+          }
+          if (this.client.avatarId) {
+            // Chargement de la photo à partir de la base des avatars
+            this.getAvatar(this.client.avatarId)
+          }
+        })
+    },
+    getAvatar (id) {
+      AvatarService.getAvatar(id)
+        .then((response) => {
+          this.image = 'data:image;base64,' + btoa(response.data.image)
         })
     },
     searchContact (term) {
@@ -124,8 +154,10 @@ export default {
       })
       return retour
     },
-    submit (event) {
-      event.preventDefault()
+    /**
+     * Enregistrement du client
+     */
+    save () {
       if (this.modification) {
         ClientService.saveClient(this.client)
           .then((response) => {
@@ -136,6 +168,25 @@ export default {
           .then((response) => {
             this.$router.push('/clients')
           })
+      }
+    },
+    submit (event) {
+      event.preventDefault()
+      // Enregistrement de l'avatar si l'utilisateur a téléchargé une image
+      if (this.fileData) {
+        const avatar = {}
+        avatar.image = this.fileData
+        AvatarService.addAvatar(avatar)
+          .then((response) => {
+            if (response.data.id) {
+              this.client.avatarId = response.data.id
+            }
+            this.save()
+          }).catch(e => {
+            console.log(e)
+          })
+      } else {
+        this.save()
       }
     }
   },
@@ -158,6 +209,20 @@ export default {
         } else {
           this.premierChargement = true
         }
+      }
+    },
+    file: function (o, n) {
+      if (o.size < 300000) {
+        // Récupération du contenu du fichier
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.fileData = e.target.result
+          this.image = 'data:image/jpeg;base64,' + btoa(this.fileData)
+          this.boutonAvatar = 'Mettre à jour l\'avatar'
+        }
+        reader.readAsBinaryString(o)
+      } else {
+        window.alert('L\'image que vous venez de télécharger est trop lourde pour être un avatar, son poids dépasse 300 Ko. Veuillez réduire sa taille.')
       }
     }
   }
