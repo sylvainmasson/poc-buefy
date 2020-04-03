@@ -14,6 +14,7 @@ module.exports = () => {
       "email": faker.internet.email(),
       "birthdate": faker.date.past(30, new Date("1998-01-01")).toISOString().substring(0, 10),
       "telephonenumber": faker.phone.phoneNumberFormat(),
+      "commentaire": faker.lorem.paragraph(),
       "entreprise": {
         "siret": "22440002800011",
         "libelle": "Loire Atlantique"

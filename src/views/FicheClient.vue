@@ -32,7 +32,7 @@
         </b-field>
         <!-- Mettre en majuscule le premier caractère -->
         <b-field label="Nom *" horizontal>
-            <b-input v-model="client.nom" required  maxlength="10" :has-counter="false"></b-input>
+            <b-input v-model="client.nom" required  maxlength="10" :has-counter="false" aria-autocomplete="true"></b-input>
         </b-field>
         <b-field label="Prénom *" horizontal>
             <b-input v-model="client.prenom" required maxlength="100" :has-counter="false"></b-input>
@@ -73,6 +73,9 @@
                 </template>
             </b-taginput>
         </b-field>
+        <b-field label="Commentaire" horizontal>
+          <vue-editor v-model="client.commentaire" :editorToolbar="customToolbar"></vue-editor>
+        </b-field>
         <form-footer :routeRetour="routeRetour" :changement="changement"/>
       </section>
       </form>
@@ -84,6 +87,7 @@
 <script>
 import ClientService from '../services/ClientService'
 import AvatarService from '../services/AvatarService'
+import customToolbar from '../constants/CustomToolbar'
 
 export default {
   name: 'FicheClient',
@@ -106,6 +110,8 @@ export default {
       fileData: null,
       boutonAvatar: "Ajouter l'avatar",
       image: null,
+      // Paramétrage des options du champ de texte riche
+      customToolbar: customToolbar,
       routeRetour: {
         name: 'Clients'
       }

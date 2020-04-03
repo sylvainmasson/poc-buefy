@@ -9,6 +9,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'buefy/dist/buefy.css'
 // import 'bulma/css/bulma.min.css'
 // import '@/assets/css/appli.css'
+import { VueEditor } from 'vue2-editor'
 
 // Composant applicatif
 import EmptySlot from '@/components/EmptySlot'
@@ -22,6 +23,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
 Vue.use(Buefy)
+Vue.component('vue-editor', VueEditor)
 
 Vue.component('empty-slot', EmptySlot)
 Vue.component('tab-header', TabHeader)
