@@ -9,19 +9,19 @@
       <form id="signUpForm" @submit.prevent="submit">
       <section>
         <b-field label="Avatar"  v-if="image || client.avatarUrl" horizontal>
-          <img v-if="image" :src="image">
-          <img v-else :src="client.avatarUrl">
+          <img v-if="image" :src="image" alt="avatar">
+          <img v-else :src="client.avatarUrl" alt="avatar">
         </b-field>
         <b-field class="file" horizontal>
           <b-upload v-model="file" accept="image/png, image/jpeg">
-              <a class="button is-primary">
+              <a class="button is-link">
                   <b-icon icon="upload"></b-icon>
                   <span>{{boutonAvatar}}</span>
               </a>
           </b-upload>
         </b-field>
-        <b-field label="Civilité *" horizontal>
-            <b-select v-model="client.civilite" ref="civilite" required>
+        <b-field label="Civilité *" label-for="civilite" horizontal>
+            <b-select v-model="client.civilite" id="civilite" ref="civilite" required>
                 <option
                     v-for="option in civilites"
                     :value="option"
@@ -31,21 +31,21 @@
             </b-select>
         </b-field>
         <!-- Mettre en majuscule le premier caractère -->
-        <b-field label="Nom *" horizontal>
-            <b-input v-model="client.nom" required  maxlength="10" :has-counter="false" aria-autocomplete="true"></b-input>
+        <b-field label="Nom *" label-for="nom" horizontal>
+            <b-input id="nom" v-model="client.nom" required  maxlength="10" :has-counter="false"></b-input>
         </b-field>
-        <b-field label="Prénom *" horizontal>
-            <b-input v-model="client.prenom" required maxlength="100" :has-counter="false"></b-input>
+        <b-field label="Prénom *" label-for="prenom" horizontal>
+            <b-input id="prenom" v-model="client.prenom" required maxlength="100" :has-counter="false"></b-input>
         </b-field>
-        <b-field label="Email *" horizontal>
-            <b-input type="email" v-model="client.email" required icon="email"></b-input>
+        <b-field label="Email *" label-for="email" horizontal>
+            <b-input id="email" type="email" v-model="client.email" required icon="email"></b-input>
         </b-field>
-        <b-field label="Téléphone" horizontal>
-            <b-input type="tel" v-model="client.telephonenumber" icon="phone" pattern="[0-9]{10}" validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)">
+        <b-field label="Téléphone" label-for="telephone" horizontal>
+            <b-input id="telephone" type="tel" v-model="client.telephonenumber" icon="phone" pattern="[0-9]{10}" validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)">
             </b-input>
         </b-field>
-        <b-field label="Date de naissance *" horizontal>
-            <b-input type="date" v-model="client.birthdate" required icon="calendar">
+        <b-field label="Date de naissance *" label-for="birthdate" horizontal>
+            <b-input id="birthdate" type="date" v-model="client.birthdate" required icon="calendar">
             </b-input>
         </b-field>
         <field-adresse
@@ -54,8 +54,9 @@
           :showMap="true"
           @select="client.adresse = $event">
         </field-adresse>
-        <b-field label="Contacts" horizontal>
+        <b-field label="Contacts" label-for="contacts" horizontal>
             <b-taginput
+                id="contacts"
                 v-model="client.contacts"
                 :data="filteredContacts"
                 autocomplete
@@ -73,8 +74,8 @@
                 </template>
             </b-taginput>
         </b-field>
-        <b-field label="Commentaire" horizontal>
-          <vue-editor v-model="client.commentaire" :editorToolbar="customToolbar"></vue-editor>
+        <b-field label="Commentaire" label-for="commentaire" horizontal>
+          <vue-editor id="commentaire" v-model="client.commentaire" :editorToolbar="customToolbar"></vue-editor>
         </b-field>
         <form-footer :routeRetour="routeRetour" :changement="changement"/>
       </section>
