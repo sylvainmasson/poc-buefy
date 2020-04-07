@@ -5,10 +5,8 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Buefy from 'buefy'
-import '@mdi/font/css/materialdesignicons.css'
-import 'buefy/dist/buefy.css'
-// import 'bulma/css/bulma.min.css'
-// import '@/assets/css/appli.css'
+// import '@mdi/font/css/materialdesignicons.css'
+import './assets/scss/app.scss'
 import { VueEditor } from 'vue2-editor'
 
 // Composant applicatif
@@ -18,6 +16,8 @@ import ActionButton from '@/components/ActionButton'
 import FormHeader from '@/components/FormHeader'
 import FormFooter from '@/components/FormFooter'
 import FieldAdresse from '@/components/FieldAdresse'
+
+Vue.use(Buefy)
 
 Vue.config.productionTip = false
 

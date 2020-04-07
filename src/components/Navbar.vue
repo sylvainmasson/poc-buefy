@@ -43,7 +43,7 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-          <a class="button is-primary">
+          <a class="button is-link">
             <strong>Connexion</strong>
           </a>
       </div>

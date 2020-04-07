@@ -36,9 +36,9 @@
               {{props.row.adresse.commune}}
             </b-table-column>
             <b-table-column field="birthdate" label="Date de naissance" sortable centered>
-              <span class="tag is-success">
+              <!--<span class="tag is-success">-->
                   {{ new Date(props.row.birthdate).toLocaleDateString() }}
-              </span>
+              <!--</span>-->
             </b-table-column>
             <b-table-column>
               <action-button isReadable isEditable isDeletable
@@ -78,7 +78,7 @@
                     {{props.row.telephonenumber}}
                   </p>
                   <p>
-                      <b-icon icon="mail" size="is-small"></b-icon>
+                      <b-icon icon="city" size="is-small"></b-icon>
                       {{ setAdresseLabel(props.row.adresse) }}
                   </p>
                   <map-marker :coordonnees="props.row.adresse.coordonnees" height="150px"></map-marker>
@@ -90,10 +90,10 @@
               <section>
                 <b-field grouped group-multiline>
                   <div class="control is-flex">
-                      <b-switch v-model="isPaginated">Pagination</b-switch>
+                      <b-switch type="is-link" v-model="isPaginated">Pagination</b-switch>
                   </div>
                   <div class="control is-flex">
-                      <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Pagination simple</b-switch>
+                      <b-switch type="is-link" v-model="isPaginationSimple" :disabled="!isPaginated">Pagination simple</b-switch>
                   </div>
                   <b-select v-model="perPage" :disabled="!isPaginated">
                     <option value="5">5 par page</option>
@@ -110,12 +110,12 @@
               <section>
                 <b-field grouped group-multiline>
                   <div class="control is-flex">
-                      <b-switch v-model="isPaginated">Pagination</b-switch>
+                      <b-switch type="is-link" v-model="isPaginated">Pagination</b-switch>
                   </div>
                   <div class="control is-flex">
-                      <b-switch v-model="isPaginationSimple" :disabled="!isPaginated">Pagination simple</b-switch>
+                      <b-switch type="is-link" v-model="isPaginationSimple" :disabled="!isPaginated">Pagination simple</b-switch>
                   </div>
-                  <b-select v-model="perPage" :disabled="!isPaginated">
+                  <b-select aria-label="Choix du nombre de résultats par page" v-model="perPage" :disabled="!isPaginated">
                     <option value="5">5 par page</option>
                     <option value="10">10 par page</option>
                     <option value="15">15 par page</option>

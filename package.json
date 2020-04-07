@@ -10,7 +10,6 @@
     "db": "cd server && npm install && json-server index.js"
   },
   "dependencies": {
-    "@mdi/font": "^5.0.45",
     "axios": "^0.19.2",
     "buefy": "^0.8.13",
     "core-js": "^3.6.4",
@@ -38,6 +37,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.1.2",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-cli-plugin-buefy": "~0.3.7",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

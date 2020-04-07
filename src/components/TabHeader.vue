@@ -12,7 +12,7 @@
         </b-button>
       </p>
       <p class="control">
-        <b-button type="is-primary"
+        <b-button type="is-info"
             icon-left="file" title="Exporter en CSV"
             v-if="isExportable" v-on:click="$emit('click-export')">
           <span class="is-hidden-mobile"><b>Exporter</b></span>

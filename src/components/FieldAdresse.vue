@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <b-field label="Adresse *" horizontal>
+    <b-field label="Adresse *" label-for="adresse" horizontal>
       <b-autocomplete
         id="adresse"
         v-model="label"

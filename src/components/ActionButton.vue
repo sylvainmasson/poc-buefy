@@ -5,7 +5,7 @@
             icon-right="eye" title="Voir" v-if="isReadable" v-on:click="$emit('click-read')"/>
     </p>
     <p class="control">
-        <b-button type="is-info is-small"
+        <b-button type="is-link is-small"
             icon-right="pencil" title="Modifier" v-if="isEditable" v-on:click="$emit('click-edit')"/>
     </p>
     <p class="control">
