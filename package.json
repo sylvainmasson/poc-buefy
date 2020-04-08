@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --verbose --coverage=true",
     "lint": "vue-cli-service lint",
     "db": "cd server && npm install && json-server index.js"
   },

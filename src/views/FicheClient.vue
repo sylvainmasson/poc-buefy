@@ -32,10 +32,10 @@
         </b-field>
         <!-- Mettre en majuscule le premier caractère -->
         <b-field label="Nom *" label-for="nom" horizontal>
-            <b-input id="nom" v-model="client.nom" required  maxlength="10" :has-counter="false"></b-input>
+            <b-input id="nom" v-model="client.nom" required  maxlength="10" :has-counter="false" @input="changeNom"></b-input>
         </b-field>
         <b-field label="Prénom *" label-for="prenom" horizontal>
-            <b-input id="prenom" v-model="client.prenom" required maxlength="100" :has-counter="false"></b-input>
+            <b-input id="prenom" v-model="client.prenom" required maxlength="100" :has-counter="false" @input="changePrenom"></b-input>
         </b-field>
         <b-field label="Email *" label-for="email" horizontal>
             <b-input id="email" type="email" v-model="client.email" required icon="email"></b-input>
@@ -64,7 +64,7 @@
                 icon="label"
                 placeholder="Ajouter un contact"
                 @typing="searchContact"
-                :before-adding="verificationDoublon">
+                :before-adding="verificationDoublonContact">
                 <template slot="empty">
                     <b-icon
                       icon="emoticon-sad"
@@ -88,6 +88,7 @@
 <script>
 import ClientService from '../services/ClientService'
 import AvatarService from '../services/AvatarService'
+import UtilService from '../services/UtilService'
 import customToolbar from '../constants/CustomToolbar'
 
 export default {
@@ -152,14 +153,22 @@ export default {
           })
         })
     },
-    verificationDoublon (item) {
-      let retour = true
-      this.client.contacts.forEach(function (client) {
-        if (client.id === item.id) {
-          retour = false
-        }
-      })
-      return retour
+    /**
+     * Fonction déclenchée sur le changement du nom.
+     * On met la première lettre en majuscule
+     */
+    changeNom () {
+      this.client.nom = UtilService.capitalizeFirstCharacter(this.client.nom)
+    },
+    /**
+     * Fonction déclenchée sur le changement du prénom.
+     * On met la première lettre en majuscule
+     */
+    changePrenom () {
+      this.client.prenom = UtilService.capitalizeFirstCharacter(this.client.prenom)
+    },
+    verificationDoublonContact (item) {
+      return UtilService.notIn(this.client.contacts, item, 'id')
     },
     /**
      * Enregistrement du client
