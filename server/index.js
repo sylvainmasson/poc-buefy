@@ -16,8 +16,12 @@ module.exports = () => {
       "telephonenumber": faker.phone.phoneNumberFormat(),
       "commentaire": faker.lorem.paragraph(),
       "entreprise": {
-        "siret": "22440002800011",
-        "libelle": "Loire Atlantique"
+        "siret": "39793164300092",
+        "siren": "397931643",
+        "nic": "00092",
+        "nom_raison_sociale": "INSERIM",
+        "enseigne": null,
+        "libelle": "INSERIM"
       },
       "adresse" : {
         "localisationInterne" : null,
