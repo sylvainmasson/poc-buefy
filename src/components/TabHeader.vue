@@ -1,8 +1,8 @@
 <template>
   <header class="card-header level">
-    <p class="card-header-title level-left">
+    <div class="card-header-title level-left">
       {{title}}
-    </p>
+    </div>
     <div class="card-header-title field has-addons level-right">
       <p class="control">
         <b-button type="is-success"
