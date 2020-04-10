@@ -42,7 +42,7 @@
             </b-table-column>
             <b-table-column>
               <action-button isReadable isEditable isDeletable
-                v-on:click-read="goToRead"
+                v-on:click-read="goToRead(props.row.id)"
                 v-on:click-edit="goToEdit(props.row.id)"
                 v-on:click-delete="remove(props.row)"
                 :libelle="getNomComplet(props.row)"/>
@@ -190,8 +190,10 @@ export default {
     getNomComplet (client) {
       return `${client.prenom} ${client.nom}`
     },
-    goToRead () {
-      this.$router.push('About')
+    goToRead (id) {
+      if (id) {
+        this.$router.push({ name: 'ClientDetail', params: { id } })
+      }
     },
     goToEdit (id) {
       if (id) {

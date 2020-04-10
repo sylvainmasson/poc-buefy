@@ -16,6 +16,7 @@ import ActionButton from '@/components/ActionButton'
 import FormHeader from '@/components/FormHeader'
 import FormFooter from '@/components/FormFooter'
 import FieldAdresse from '@/components/FieldAdresse'
+import LabelValue from '@/components/LabelValue'
 
 Vue.use(Buefy)
 
@@ -31,6 +32,7 @@ Vue.component('action-button', ActionButton)
 Vue.component('form-header', FormHeader)
 Vue.component('form-footer', FormFooter)
 Vue.component('field-adresse', FieldAdresse)
+Vue.component('label-value', LabelValue)
 
 new Vue({
   router,

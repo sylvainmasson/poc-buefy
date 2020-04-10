@@ -96,7 +96,7 @@
         <b-field label="Commentaire" label-for="commentaire" horizontal>
           <vue-editor id="commentaire" v-model="client.commentaire" :editorToolbar="customToolbar"></vue-editor>
         </b-field>
-        <form-footer :routeRetour="routeRetour" :changement="changement"/>
+        <form-footer :routeRetour="routeRetour" :changement="changement" :readOnly="false"/>
       </section>
       </form>
     </div>

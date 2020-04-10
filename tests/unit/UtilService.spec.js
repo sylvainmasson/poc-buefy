@@ -16,22 +16,22 @@ describe('UtilService, capitalizeFirstCharacter', () => {
 })
 
 describe('UtilService, notIn', () => {
-  let item1 = {id: 1, libelle: 'toto'}
-  let item2 = {id: 2, libelle: 'titi'}
+  const item1 = { id: 1, libelle: 'toto' }
+  const item2 = { id: 2, libelle: 'titi' }
   it('Should return false if item is find', () => {
-    let items = [item1, item2]
+    const items = [item1, item2]
     expect(UtilService.notIn(items, item1, 'id')).toEqual(false)
   }),
   it('Should return true if item is not find', () => {
-    let items = [item1]
+    const items = [item1]
     expect(UtilService.notIn(items, item2, 'id')).toEqual(true)
   }),
   it('Should return true if list is empty', () => {
-    let items = [item1]
+    const items = [item1]
     expect(UtilService.notIn([], item2, 'id')).toEqual(true)
   }),
   it('Should return true if list is null', () => {
-    let items = [item1]
+    const items = [item1]
     expect(UtilService.notIn(null, item2, 'id')).toEqual(true)
   })
 })

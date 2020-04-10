@@ -24,6 +24,11 @@ const routes = [
     path: '/clients/fiche/:id',
     name: 'ClientModification',
     component: () => import(/* webpackChunkName: "clientModification" */ '../views/FicheClient.vue')
+  },
+  {
+    path: '/clients/detail/:id',
+    name: 'ClientDetail',
+    component: () => import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue')
   }
 ]
 

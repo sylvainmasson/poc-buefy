@@ -1,6 +1,12 @@
 <template>
 <div>
-  <div class="field is-grouped is-grouped-centered" style="margin-bottom:0px;">
+  <div class="field is-grouped is-grouped-right" v-if="readOnly">
+    <p class="control">
+      <b-button type="is-primary"
+        icon-left="arrow-left" title="Retour" @click="retour">Retour</b-button>
+    </p>
+  </div>
+  <div class="field is-grouped is-grouped-centered" style="margin-bottom:0px;" v-if="!readOnly">
     <p class="control">
     <button class="button is-success" type="submit">
       <span class="icon">
@@ -14,7 +20,7 @@
         icon-left="arrow-left" title="Annuler" @click="cancel">Annuler</b-button>
     </p>
   </div>
-  <div>
+  <div v-if="!readOnly">
     <span class="is-size-7"><b>(*)</b> Les champs précédés d'un astérisque sont obligatoires.</span>
   </div>
 </div>
@@ -24,6 +30,10 @@
 export default {
   name: 'FormFooter',
   props: {
+    readOnly: {
+      Boolean,
+      required: true
+    },
     changement: {
       Boolean,
       required: true
@@ -48,6 +58,9 @@ export default {
       } else {
         this.$router.push(this.routeRetour)
       }
+    },
+    retour () {
+      this.$router.push(this.routeRetour)
     }
   }
 }
