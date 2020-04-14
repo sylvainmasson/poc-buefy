@@ -246,9 +246,7 @@ export default {
     },
     remove(client) {
       if (client) {
-        ClientService.deleteClient(client.id).then(function() {
-          this.getClients()
-        })
+        ClientService.deleteClient(client.id).then(this.getClients())
       }
     },
     openDetails(row) {
