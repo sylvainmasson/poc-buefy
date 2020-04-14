@@ -1,22 +1,22 @@
 import Vue from 'vue'
 
 export default {
-  getClients () {
+  getClients() {
     return Vue.axios.get('clients')
   },
-  getClient (id) {
+  getClient(id) {
     return Vue.axios.get(`clients/${id}`)
   },
-  addClient (client) {
+  addClient(client) {
     return Vue.axios.post('clients', client)
   },
-  saveClient (client) {
+  saveClient(client) {
     return Vue.axios.put(`clients/${client.id}`, client)
   },
-  deleteClient (id) {
+  deleteClient(id) {
     return Vue.axios.delete(`clients/${id}`)
   },
-  searchClient (term) {
+  searchClient(term) {
     return Vue.axios.get(`clients?nom_like=${term}`)
   }
 }

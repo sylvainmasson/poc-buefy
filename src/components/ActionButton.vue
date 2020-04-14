@@ -1,18 +1,33 @@
 <template>
   <div class="field has-addons">
     <p class="control">
-        <b-button type="is-success is-small"
-            icon-right="eye" title="Voir" v-if="isReadable" v-on:click="$emit('click-read')"/>
+      <b-button
+        type="is-success is-small"
+        icon-right="eye"
+        title="Voir"
+        v-if="isReadable"
+        v-on:click="$emit('click-read')"
+      />
     </p>
     <p class="control">
-        <b-button type="is-link is-small"
-            icon-right="pencil" title="Modifier" v-if="isEditable" v-on:click="$emit('click-edit')"/>
+      <b-button
+        type="is-link is-small"
+        icon-right="pencil"
+        title="Modifier"
+        v-if="isEditable"
+        v-on:click="$emit('click-edit')"
+      />
     </p>
     <p class="control">
-        <b-button type="is-danger is-small"
-            icon-right="delete" title="Supprimer" v-if="isDeletable" v-on:click="remove"/>
+      <b-button
+        type="is-danger is-small"
+        icon-right="delete"
+        title="Supprimer"
+        v-if="isDeletable"
+        v-on:click="remove"
+      />
     </p>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -28,7 +43,7 @@ export default {
     }
   },
   methods: {
-    remove () {
+    remove() {
       this.$buefy.dialog.confirm({
         title: 'Confirmation de suppression',
         message: `Voulez vous supprimer cet élément : ${this.libelle} ?`,
@@ -44,6 +59,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
+<style scoped></style>

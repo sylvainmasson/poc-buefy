@@ -13,22 +13,28 @@ const routes = [
   {
     path: '/clients',
     name: 'Clients',
-    component: () => import(/* webpackChunkName: "clients" */ '../views/Clients.vue')
+    component: () =>
+      import(/* webpackChunkName: "clients" */ '../views/Clients.vue')
   },
   {
     path: '/clients/fiche/',
     name: 'ClientAjout',
-    component: () => import(/* webpackChunkName: "clientAjout" */ '../views/FicheClient.vue')
+    component: () =>
+      import(/* webpackChunkName: "clientAjout" */ '../views/FicheClient.vue')
   },
   {
     path: '/clients/fiche/:id',
     name: 'ClientModification',
-    component: () => import(/* webpackChunkName: "clientModification" */ '../views/FicheClient.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "clientModification" */ '../views/FicheClient.vue'
+      )
   },
   {
     path: '/clients/detail/:id',
     name: 'ClientDetail',
-    component: () => import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue')
+    component: () =>
+      import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue')
   }
 ]
 

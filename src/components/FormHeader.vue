@@ -1,12 +1,10 @@
 <template>
   <header class="card-header level">
     <p class="card-header-title level-left">
-      <span v-if="modification">
-        {{libelleModification}} : {{libelleEnTete}}
-      </span>
-      <span v-else="">
-        {{libelleCreation}}
-      </span>
+      <span v-if="modification"
+        >{{ libelleModification }} : {{ libelleEnTete }}</span
+      >
+      <span v-else>{{ libelleCreation }}</span>
     </p>
   </header>
 </template>
