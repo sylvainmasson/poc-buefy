@@ -13,11 +13,15 @@
         @select="select"
         @input="search"
         :required="required"
-        clearable>
+        clearable
+      >
       </b-autocomplete>
     </b-field>
     <b-field label="" horizontal v-if="showMap">
-      <map-marker :coordonnees="adresseLocal.coordonnees" height="300px"></map-marker>
+      <map-marker
+        :coordonnees="adresseLocal.coordonnees"
+        height="300px"
+      ></map-marker>
     </b-field>
   </div>
 </template>
@@ -42,7 +46,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       adresses: [],
       label: null,
@@ -52,17 +56,16 @@ export default {
     }
   },
   methods: {
-    search (term) {
-      if ((term) && (term.length > 2)) {
-        AdresseService.searchAdresse(term)
-          .then((response) => {
-            if (response.data) {
-              this.adresses = response.data.features
-            }
-          })
+    search(term) {
+      if (term && term.length > 2) {
+        AdresseService.searchAdresse(term).then(response => {
+          if (response.data) {
+            this.adresses = response.data.features
+          }
+        })
       }
     },
-    select (item) {
+    select(item) {
       if (item) {
         this.label = item.properties.label
         this.adresseLocal.codePostal = item.properties.postcode
@@ -89,8 +92,13 @@ export default {
       }
       this.$emit('select', this.adresseLocal)
     },
-    setCoordonnees (adresse) {
-      if ((adresse.geometry) && (adresse.geometry.coordinates) && (adresse.geometry.coordinates[0]) && (adresse.geometry.coordinates[1])) {
+    setCoordonnees(adresse) {
+      if (
+        adresse.geometry &&
+        adresse.geometry.coordinates &&
+        adresse.geometry.coordinates[0] &&
+        adresse.geometry.coordinates[1]
+      ) {
         this.adresseLocal.coordonnees = []
         this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[1])
         this.adresseLocal.coordonnees.push(adresse.geometry.coordinates[0])
@@ -98,7 +106,7 @@ export default {
     }
   },
   watch: {
-    adresse: function () {
+    adresse: function() {
       this.adresseLocal = this.adresse
       this.label = AdresseService.setAdresseLabel(this.adresseLocal)
     }
