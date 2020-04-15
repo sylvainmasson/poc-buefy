@@ -19,7 +19,7 @@
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
+      <div class="navbar-start" v-if="isAuthenticated">
         <a class="navbar-item" @click="$router.push('/clients')">
           Client
         </a>
@@ -46,12 +46,22 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
-          <a class="button is-link">
-            <strong>Connexion</strong>
-          </a>
-        </div>
+        <Connexion></Connexion>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import Connexion from '@/components/Connexion'
+import { mapGetters } from 'vuex'
+
+export default {
+  components: {
+    Connexion
+  },
+  computed: {
+    ...mapGetters(['authenticatedUser', 'isAuthenticated'])
+  }
+}
+</script>

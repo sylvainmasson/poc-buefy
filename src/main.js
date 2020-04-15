@@ -34,6 +34,25 @@ Vue.component('form-footer', FormFooter)
 Vue.component('field-adresse', FieldAdresse)
 Vue.component('label-value', LabelValue)
 
+/**
+ * L'utilisateur doit être connecté pour visualiser les pages autre que accueil
+ * @params to route où l'on va
+ * @params from route d'où l'on vient
+ * @params next déclenchement de la navigation
+ */
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    next()
+  } else {
+    if (store.getters.isAuthenticated) {
+      next()
+    } else {
+      window.alert('Vous devez être authentifié pour visualiser cette page')
+      router.push('/')
+    }
+  }
+})
+
 new Vue({
   router,
   store,
