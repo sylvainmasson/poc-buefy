@@ -25,5 +25,10 @@ yarn test:unit
 yarn lint
 ```
 
+### Load database and lauch REST api on data
+```
+yarn db
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

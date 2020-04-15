@@ -91,3 +91,13 @@ $colors: map-merge($colors, $addColors);
 .dropdown-menu {
   z-index: 50 !important;
 }
+
+@media screen and (max-width: 768px) {
+  .level-left + .level-right {
+      margin-top: 0 !important;
+  }
+
+  .field.is-grouped.is-grouped-multiline:last-child {
+    margin-bottom: 0 !important;
+  }
+}

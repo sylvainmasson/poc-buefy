@@ -1,14 +1,13 @@
 <template>
-  <section v-if="(coordonnees) && (coordonnees.length > 0)">
+  <section v-if="coordonnees && coordonnees.length > 0">
     <l-map v-bind:style="'height:' + height" :zoom="zoom" :center="coordonnees">
-      <l-tile-layer  :url="url"></l-tile-layer>
+      <l-tile-layer :url="url"></l-tile-layer>
       <l-marker :lat-lng="coordonnees"></l-marker>
     </l-map>
   </section>
 </template>
 
 <script>
-
 import L from 'leaflet'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -35,7 +34,7 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 12
@@ -50,16 +49,17 @@ export default {
 </script>
 
 <style>
-  .leaflet-pane {
-    z-index : auto !important;
-  }
+.leaflet-pane {
+  z-index: auto !important;
+}
 .leaflet-marker-pane {
-    z-index : 600 !important;
-  }
-.leaflet-top, .leaflet-bottom {
-    z-index : auto !important;
-  }
+  z-index: 600 !important;
+}
+.leaflet-top,
+.leaflet-bottom {
+  z-index: auto !important;
+}
 .leaflet-control {
-  z-index : auto !important;
+  z-index: auto !important;
 }
 </style>
