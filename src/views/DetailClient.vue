@@ -112,6 +112,7 @@ export default {
       }
     }
   },
+  props: ['id'],
   methods: {
     getAvatar(id) {
       AvatarService.getAvatar(id).then(response => {
@@ -120,7 +121,7 @@ export default {
     }
   },
   mounted() {
-    ClientService.getClient(this.$route.params.id).then(response => {
+    ClientService.getClient(this.id).then(response => {
       this.client = response.data
       this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
       this.labelAdresse = AdresseService.setAdresseLabel(this.client.adresse)

@@ -28,13 +28,15 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "clientModification" */ '../views/FicheClient.vue'
-      )
+      ),
+    props: true
   },
   {
     path: '/clients/detail/:id',
     name: 'ClientDetail',
     component: () =>
-      import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue')
+      import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue'),
+    props: true
   }
 ]
 

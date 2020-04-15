@@ -190,6 +190,7 @@ export default {
       }
     }
   },
+  props: ['id'],
   methods: {
     getClient(id) {
       ClientService.getClient(id).then(response => {
@@ -333,8 +334,8 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.params.id) {
-      this.getClient(this.$route.params.id)
+    if (this.id) {
+      this.getClient(this.id)
       // Mettre le focus sur le premier élément du formulaire
       this.$refs.civilite.focus()
     }
