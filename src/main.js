@@ -17,6 +17,7 @@ import FormHeader from '@/components/FormHeader'
 import FormFooter from '@/components/FormFooter'
 import FieldAdresse from '@/components/FieldAdresse'
 import LabelValue from '@/components/LabelValue'
+import Pagination from '@/components/Pagination'
 
 Vue.use(Buefy)
 
@@ -33,6 +34,7 @@ Vue.component('form-header', FormHeader)
 Vue.component('form-footer', FormFooter)
 Vue.component('field-adresse', FieldAdresse)
 Vue.component('label-value', LabelValue)
+Vue.component('pagination', Pagination)
 
 /**
  * L'utilisateur doit être connecté pour visualiser les pages autre que accueil
