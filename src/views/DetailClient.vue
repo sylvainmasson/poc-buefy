@@ -115,21 +115,29 @@ export default {
   props: ['id'],
   methods: {
     getAvatar(id) {
-      AvatarService.getAvatar(id).then(response => {
-        this.image = 'data:image;base64,' + btoa(response.data.image)
-      })
+      AvatarService.getAvatar(id)
+        .then(response => {
+          this.image = 'data:image;base64,' + btoa(response.data.image)
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     }
   },
   mounted() {
-    ClientService.getClient(this.id).then(response => {
-      this.client = response.data
-      this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
-      this.labelAdresse = AdresseService.setAdresseLabel(this.client.adresse)
-      if (this.client.avatarId) {
-        // Chargement de la photo à partir de la base des avatars
-        this.getAvatar(this.client.avatarId)
-      }
-    })
+    ClientService.getClient(this.id)
+      .then(response => {
+        this.client = response.data
+        this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
+        this.labelAdresse = AdresseService.setAdresseLabel(this.client.adresse)
+        if (this.client.avatarId) {
+          // Chargement de la photo à partir de la base des avatars
+          this.getAvatar(this.client.avatarId)
+        }
+      })
+      .catch(e => {
+        this.$store.dispatch('addNotificationError', e.response.data)
+      })
   },
   components: {
     MapMarker

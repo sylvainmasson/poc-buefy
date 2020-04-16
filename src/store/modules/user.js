@@ -21,16 +21,24 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchUser({ commit, state }, id) {
+  fetchUser({ commit, state, dispatch }, id) {
     if (id == state.user.id) {
       return state.user
     } else {
-      return UserService.getUser(id).then(response => {
-        commit('SET_USER', response.data)
-        commit('SET_AUTHENTICATED', true)
-        router.push({ name: 'Clients' })
-        return response.data
-      })
+      return UserService.getUser(id)
+        .then(response => {
+          commit('SET_USER', response.data)
+          commit('SET_AUTHENTICATED', true)
+          dispatch(
+            'addNotificationSuccess',
+            'Bienvenue ' + response.data.nomPrenom
+          )
+          router.push({ name: 'Clients' })
+          return response.data
+        })
+        .catch(e => {
+          dispatch('addNotificationError', e.response.data)
+        })
     }
   },
   disconnectUser({ commit }) {

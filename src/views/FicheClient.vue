@@ -193,26 +193,34 @@ export default {
   props: ['id'],
   methods: {
     getClient(id) {
-      ClientService.getClient(id).then(response => {
-        this.client = response.data
-        this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
-        this.modification = true
-        if (this.client.avatarId || this.client.avatarUrl) {
-          this.boutonAvatar = "Mettre à jour l'avatar"
-        }
-        if (this.client.avatarId) {
-          // Chargement de la photo à partir de la base des avatars
-          this.getAvatar(this.client.avatarId)
-        }
-        if (this.client.entreprise) {
-          this.libelleEntreprise = this.client.entreprise.libelle
-        }
-      })
+      ClientService.getClient(id)
+        .then(response => {
+          this.client = response.data
+          this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
+          this.modification = true
+          if (this.client.avatarId || this.client.avatarUrl) {
+            this.boutonAvatar = "Mettre à jour l'avatar"
+          }
+          if (this.client.avatarId) {
+            // Chargement de la photo à partir de la base des avatars
+            this.getAvatar(this.client.avatarId)
+          }
+          if (this.client.entreprise) {
+            this.libelleEntreprise = this.client.entreprise.libelle
+          }
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     getAvatar(id) {
-      AvatarService.getAvatar(id).then(response => {
-        this.image = 'data:image;base64,' + btoa(response.data.image)
-      })
+      AvatarService.getAvatar(id)
+        .then(response => {
+          this.image = 'data:image;base64,' + btoa(response.data.image)
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     /**
      * Recherche des entreprises, déclenché par le composant d'autocomplétion
@@ -262,17 +270,21 @@ export default {
       this.client.entreprise = {}
     },
     searchContact(term) {
-      ClientService.searchClient(term).then(response => {
-        const clients = response.data
-        this.filteredContacts = clients
-          .filter(client => client.id !== this.client.id)
-          .map(client => {
-            return {
-              id: client.id,
-              nomComplet: `${client.nom} ${client.prenom}`
-            }
-          })
-      })
+      ClientService.searchClient(term)
+        .then(response => {
+          const clients = response.data
+          this.filteredContacts = clients
+            .filter(client => client.id !== this.client.id)
+            .map(client => {
+              return {
+                id: client.id,
+                nomComplet: `${client.nom} ${client.prenom}`
+              }
+            })
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     /**
      * Fonction déclenchée sur le changement du nom.
@@ -298,13 +310,23 @@ export default {
      */
     save() {
       if (this.modification) {
-        ClientService.saveClient(this.client).then(
-          this.$router.push(this.routeRetour)
-        )
+        ClientService.saveClient(this.client)
+          .then(() => {
+            this.$store.dispatch('addNotificationSuccessSave')
+            this.$router.push(this.routeRetour)
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       } else {
-        ClientService.addClient(this.client).then(
-          this.$router.push(this.routeRetour)
-        )
+        ClientService.addClient(this.client)
+          .then(() => {
+            this.$store.dispatch('addNotificationSuccessSave')
+            this.$router.push(this.routeRetour)
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       }
     },
     submit() {
@@ -325,7 +347,7 @@ export default {
               this.save()
             })
             .catch(e => {
-              console.log(e)
+              this.$store.dispatch('addNotificationError', e.response.data)
             })
         } else {
           this.save()

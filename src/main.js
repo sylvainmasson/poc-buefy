@@ -49,7 +49,10 @@ router.beforeEach((to, from, next) => {
     if (store.getters.isAuthenticated) {
       next()
     } else {
-      window.alert('Vous devez être authentifié pour visualiser cette page')
+      store.dispatch(
+        'addNotificationWarning',
+        'Vous devez être authentifié pour visualiser cette page'
+      )
       router.push('/')
     }
   }

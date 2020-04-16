@@ -4,7 +4,7 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <router-view :key="$route.fullPath" />
+          <router-view />
         </div>
       </div>
     </section>

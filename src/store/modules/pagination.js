@@ -39,9 +39,7 @@ export const getters = {
       // on renvoit celle par défaut
       let newPagination = {
         id: id,
-        isPaginated: state.defaultPagination.isPaginated,
-        isSimplePagination: state.defaultPagination.isSimplePagination,
-        perPage: state.defaultPagination.perPage
+        ...state.defaultPagination
       }
       return newPagination
     }

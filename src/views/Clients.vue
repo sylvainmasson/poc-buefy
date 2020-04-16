@@ -173,7 +173,7 @@ export default {
           this.isLoading = false
         })
         .catch(e => {
-          console.log(e)
+          this.$store.dispatch('addNotificationError', e.response.data)
           this.isLoading = false
         })
     },
