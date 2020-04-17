@@ -38,7 +38,7 @@
               </b-select>
             </b-field>
             <!-- Mettre en majuscule le premier caractère -->
-            <base-input
+            <field-input
               id="nom"
               label="Nom"
               v-model="client.nom"
@@ -48,7 +48,7 @@
               :has-counter="false"
               @input="changeNom"
             />
-            <base-input
+            <field-input
               id="prenom"
               label="Prénom"
               v-model="client.prenom"
@@ -58,7 +58,7 @@
               :has-counter="false"
               @input="changePrenom"
             />
-            <base-input
+            <field-input
               id="email"
               label="Email"
               v-model="client.email"
@@ -66,7 +66,7 @@
               icon="email"
               required="true"
             />
-            <base-input
+            <field-input
               id="telephone"
               label="Téléphone"
               v-model="client.telephonenumber"
@@ -74,7 +74,7 @@
               pattern="[0-9]{10}"
               validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)"
             />
-            <base-input
+            <field-input
               id="birthdate"
               label="Date de naissance"
               v-model="client.birthdate"
@@ -126,7 +126,7 @@
                 </template>
               </b-taginput>
             </b-field>
-            <base-richtext
+            <field-richtext
               id="commentaire"
               label="Commentaire"
               v-model="client.commentaire"
