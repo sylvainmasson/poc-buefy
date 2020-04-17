@@ -5,32 +5,9 @@
 </template>
 
 <script>
+import { FieldMixin } from '@/mixins/FieldMixin'
+
 export default {
-  inheritAttrs: false,
-  props: {
-    id: {
-      String,
-      required: true
-    },
-    label: {
-      type: String,
-      default: ''
-    },
-    value: [String, Number]
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit('input', event)
-    }
-  },
-  computed: {
-    getLabel() {
-      if (this.$attrs.required) {
-        return this.label + ' *'
-      } else {
-        return this.label
-      }
-    }
-  }
+  mixins: [FieldMixin]
 }
 </script>

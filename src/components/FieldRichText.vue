@@ -11,39 +11,15 @@
 </template>
 
 <script>
+import { FieldMixin } from '@/mixins/FieldMixin'
 import customToolbar from '../constants/CustomToolbar'
 
 export default {
-  inheritAttrs: false,
+  mixins: [FieldMixin],
   data() {
     return {
       // Paramétrage des options du champ de texte riche
       customToolbar: customToolbar
-    }
-  },
-  props: {
-    id: {
-      String,
-      required: true
-    },
-    label: {
-      type: String,
-      default: ''
-    },
-    value: [String]
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit('input', event)
-    }
-  },
-  computed: {
-    getLabel() {
-      if (this.$attrs.required) {
-        return this.label + ' *'
-      } else {
-        return this.label
-      }
     }
   }
 }
