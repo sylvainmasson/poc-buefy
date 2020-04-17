@@ -38,58 +38,50 @@
               </b-select>
             </b-field>
             <!-- Mettre en majuscule le premier caractère -->
-            <b-field label="Nom *" label-for="nom" horizontal>
-              <b-input
-                id="nom"
-                v-model="client.nom"
-                required
-                maxlength="10"
-                :has-counter="false"
-                @input="changeNom"
-              ></b-input>
-            </b-field>
-            <b-field label="Prénom *" label-for="prenom" horizontal>
-              <b-input
-                id="prenom"
-                v-model="client.prenom"
-                required
-                maxlength="100"
-                :has-counter="false"
-                @input="changePrenom"
-              ></b-input>
-            </b-field>
-            <b-field label="Email *" label-for="email" horizontal>
-              <b-input
-                id="email"
-                type="email"
-                v-model="client.email"
-                required
-                icon="email"
-              ></b-input>
-            </b-field>
-            <b-field label="Téléphone" label-for="telephone" horizontal>
-              <b-input
-                id="telephone"
-                type="tel"
-                v-model="client.telephonenumber"
-                icon="phone"
-                pattern="[0-9]{10}"
-                validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)"
-              ></b-input>
-            </b-field>
-            <b-field
-              label="Date de naissance *"
-              label-for="birthdate"
-              horizontal
-            >
-              <b-input
-                id="birthdate"
-                type="date"
-                v-model="client.birthdate"
-                required
-                icon="calendar"
-              ></b-input>
-            </b-field>
+            <base-input
+              id="nom"
+              label="Nom"
+              v-model="client.nom"
+              type="text"
+              required="true"
+              maxlength="50"
+              :has-counter="false"
+              @input="changeNom"
+            />
+            <base-input
+              id="prenom"
+              label="Prénom"
+              v-model="client.prenom"
+              type="text"
+              required="true"
+              maxlength="100"
+              :has-counter="false"
+              @input="changePrenom"
+            />
+            <base-input
+              id="email"
+              label="Email"
+              v-model="client.email"
+              type="email"
+              icon="email"
+              required="true"
+            />
+            <base-input
+              id="telephone"
+              label="Téléphone"
+              v-model="client.telephonenumber"
+              icon="phone"
+              pattern="[0-9]{10}"
+              validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)"
+            />
+            <base-input
+              id="birthdate"
+              label="Date de naissance"
+              v-model="client.birthdate"
+              type="date"
+              icon="calendar"
+              required="true"
+            />
             <field-adresse
               :required="true"
               :adresse="client.adresse"
@@ -134,13 +126,11 @@
                 </template>
               </b-taginput>
             </b-field>
-            <b-field label="Commentaire" label-for="commentaire" horizontal>
-              <vue-editor
-                id="commentaire"
-                v-model="client.commentaire"
-                :editorToolbar="customToolbar"
-              ></vue-editor>
-            </b-field>
+            <base-richtext
+              id="commentaire"
+              label="Commentaire"
+              v-model="client.commentaire"
+            />
             <form-footer :routeRetour="routeRetour" :readOnly="false" />
           </section>
         </form>
@@ -154,7 +144,6 @@ import ClientService from '../services/ClientService'
 import EntrepriseService from '../services/EntrepriseService'
 import AvatarService from '../services/AvatarService'
 import UtilService from '../services/UtilService'
-import customToolbar from '../constants/CustomToolbar'
 import AnnulationService from '../services/AnnulationService'
 
 export default {
@@ -181,8 +170,6 @@ export default {
       fileData: null,
       boutonAvatar: "Ajouter l'avatar",
       image: null,
-      // Paramétrage des options du champ de texte riche
-      customToolbar: customToolbar,
       routeRetour: {
         name: 'Clients'
       }

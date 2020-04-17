@@ -18,6 +18,8 @@ import FormFooter from '@/components/FormFooter'
 import FieldAdresse from '@/components/FieldAdresse'
 import LabelValue from '@/components/LabelValue'
 import Pagination from '@/components/Pagination'
+import BaseInput from '@/components/BaseInput'
+import BaseRichText from '@/components/BaseRichText'
 
 Vue.use(Buefy)
 
@@ -35,6 +37,8 @@ Vue.component('form-footer', FormFooter)
 Vue.component('field-adresse', FieldAdresse)
 Vue.component('label-value', LabelValue)
 Vue.component('pagination', Pagination)
+Vue.component('base-input', BaseInput)
+Vue.component('base-richtext', BaseRichText)
 
 new Vue({
   router,

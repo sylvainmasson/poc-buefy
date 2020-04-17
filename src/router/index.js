@@ -38,6 +38,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "clientAjout" */ '../views/DetailClient.vue'),
     props: true
+  },
+  // route par défaut, à laisser en dernier
+  {
+    path: '/*',
+    alias: '/',
+    component: Home
   }
 ]
 
