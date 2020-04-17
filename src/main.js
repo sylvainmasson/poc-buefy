@@ -36,29 +36,6 @@ Vue.component('field-adresse', FieldAdresse)
 Vue.component('label-value', LabelValue)
 Vue.component('pagination', Pagination)
 
-/**
- * L'utilisateur doit être connecté pour visualiser les pages autre que accueil
- * @params to route où l'on va
- * @params from route d'où l'on vient
- * @params next déclenchement de la navigation
- */
-router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
-    next()
-  } else {
-    if (store.getters.isAuthenticated) {
-      next()
-    } else {
-      store.dispatch(
-        'addNotificationWarning',
-        'Vous devez être authentifié pour visualiser cette page'
-      )
-      next(false)
-      router.push('/')
-    }
-  }
-})
-
 new Vue({
   router,
   store,
