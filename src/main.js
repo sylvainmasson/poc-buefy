@@ -53,6 +53,7 @@ router.beforeEach((to, from, next) => {
         'addNotificationWarning',
         'Vous devez être authentifié pour visualiser cette page'
       )
+      next(false)
       router.push('/')
     }
   }
