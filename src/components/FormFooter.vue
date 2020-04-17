@@ -29,7 +29,7 @@
           type="is-light"
           icon-left="arrow-left"
           title="Annuler"
-          @click="cancel"
+          @click="retour"
           >Annuler</b-button
         >
       </p>
@@ -50,31 +50,12 @@ export default {
       Boolean,
       required: true
     },
-    changement: {
-      Boolean,
-      required: true
-    },
     routeRetour: {
       Object,
       required: true
     }
   },
   methods: {
-    cancel() {
-      if (this.changement) {
-        this.$buefy.dialog.confirm({
-          title: 'Annulation',
-          message: 'Souhaitez vous abandonner les modifications apportées ?',
-          confirmText: 'Oui',
-          cancelText: 'Non',
-          type: 'is-warning',
-          hasIcon: true,
-          onConfirm: () => this.$router.push(this.routeRetour)
-        })
-      } else {
-        this.$router.push(this.routeRetour)
-      }
-    },
     retour() {
       this.$router.push(this.routeRetour)
     }

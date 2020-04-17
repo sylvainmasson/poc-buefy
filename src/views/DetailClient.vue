@@ -78,11 +78,7 @@
             </label-value>
           </div>
         </div>
-        <form-footer
-          :routeRetour="routeRetour"
-          changement="false"
-          :readOnly="true"
-        />
+        <form-footer :routeRetour="routeRetour" :readOnly="true" />
       </div>
     </div>
   </div>

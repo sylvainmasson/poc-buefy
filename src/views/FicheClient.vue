@@ -141,11 +141,7 @@
                 :editorToolbar="customToolbar"
               ></vue-editor>
             </b-field>
-            <form-footer
-              :routeRetour="routeRetour"
-              :changement="changement"
-              :readOnly="false"
-            />
+            <form-footer :routeRetour="routeRetour" :readOnly="false" />
           </section>
         </form>
       </div>
@@ -159,6 +155,7 @@ import EntrepriseService from '../services/EntrepriseService'
 import AvatarService from '../services/AvatarService'
 import UtilService from '../services/UtilService'
 import customToolbar from '../constants/CustomToolbar'
+import AnnulationService from '../services/AnnulationService'
 
 export default {
   name: 'FicheClient',
@@ -179,6 +176,7 @@ export default {
       modification: false,
       changement: false,
       premierChargement: false,
+      enregistrement: false,
       file: null,
       fileData: null,
       boutonAvatar: "Ajouter l'avatar",
@@ -312,8 +310,7 @@ export default {
       if (this.modification) {
         ClientService.saveClient(this.client)
           .then(() => {
-            this.$store.dispatch('addNotificationSuccessSave')
-            this.$router.push(this.routeRetour)
+            this.gestionRetour()
           })
           .catch(e => {
             this.$store.dispatch('addNotificationError', e.response.data)
@@ -321,13 +318,17 @@ export default {
       } else {
         ClientService.addClient(this.client)
           .then(() => {
-            this.$store.dispatch('addNotificationSuccessSave')
-            this.$router.push(this.routeRetour)
+            this.gestionRetour()
           })
           .catch(e => {
             this.$store.dispatch('addNotificationError', e.response.data)
           })
       }
+    },
+    gestionRetour() {
+      this.enregistrement = true
+      this.$store.dispatch('addNotificationSuccessSave')
+      this.$router.push(this.routeRetour)
     },
     submit() {
       // Vérification qu'une entreprise a bien été saisie
@@ -392,6 +393,15 @@ export default {
         )
       }
     }
+  },
+  beforeRouteLeave(routeTo, routeFrom, next) {
+    AnnulationService.annulation(
+      routeTo,
+      routeFrom,
+      next,
+      this.changement,
+      this.enregistrement
+    )
   }
 }
 </script>
