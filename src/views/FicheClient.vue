@@ -10,18 +10,14 @@
       <div class="card-content">
         <form id="signUpForm" @submit.prevent="submit">
           <section>
-            <b-field label="Avatar" v-if="image || client.avatarUrl" horizontal>
-              <img v-if="image" :src="image" alt="avatar" />
-              <img v-else :src="client.avatarUrl" alt="avatar" />
-            </b-field>
-            <b-field class="file" horizontal>
-              <b-upload v-model="file" accept="image/png, image/jpeg">
-                <a class="button is-link">
-                  <b-icon icon="upload"></b-icon>
-                  <span>{{ boutonAvatar }}</span>
-                </a>
-              </b-upload>
-            </b-field>
+            <field-avatar
+              :imageData="imageData"
+              :avatarUrl="client.avatarUlr"
+            />
+            <field-upload-image
+              :libelleBouton="boutonAvatar"
+              @upload="upload"
+            />
             <b-field label="Civilité *" label-for="civilite" horizontal>
               <b-select
                 v-model="client.civilite"
@@ -166,10 +162,8 @@ export default {
       changement: false,
       premierChargement: false,
       enregistrement: false,
-      file: null,
-      fileData: null,
+      imageData: null,
       boutonAvatar: "Ajouter l'avatar",
-      image: null,
       routeRetour: {
         name: 'Clients'
       }
@@ -201,7 +195,7 @@ export default {
     getAvatar(id) {
       AvatarService.getAvatar(id)
         .then(response => {
-          this.image = 'data:image;base64,' + btoa(response.data.image)
+          this.imageData = response.data.image
         })
         .catch(e => {
           this.$store.dispatch('addNotificationError', e.response.data)
@@ -291,6 +285,14 @@ export default {
       return UtilService.notIn(this.client.contacts, item, 'id')
     },
     /**
+     * Gestion de la mise à jour de l'image
+     * @param {Object} event fichier image et libellé du bouton à mettre à jour
+     */
+    upload(event) {
+      this.imageData = event.imageData
+      this.boutonAvatar = event.libelleBouton
+    },
+    /**
      * Enregistrement du client
      */
     save() {
@@ -324,11 +326,12 @@ export default {
         this.$refs.entreprise.focus()
       } else {
         // Enregistrement de l'avatar si l'utilisateur a téléchargé une image
-        if (this.fileData) {
+        if (this.imageData) {
           const avatar = {}
-          avatar.image = this.fileData
+          avatar.image = this.imageData
           AvatarService.addAvatar(avatar)
             .then(response => {
+              // Récupération de l'id de l'avatar
               if (response.data.id) {
                 this.client.avatarId = response.data.id
               }
@@ -362,22 +365,6 @@ export default {
         } else {
           this.premierChargement = true
         }
-      }
-    },
-    file: function(o) {
-      if (o.size < 300000) {
-        // Récupération du contenu du fichier
-        var reader = new FileReader()
-        reader.onload = e => {
-          this.fileData = e.target.result
-          this.image = 'data:image/jpeg;base64,' + btoa(this.fileData)
-          this.boutonAvatar = "Mettre à jour l'avatar"
-        }
-        reader.readAsBinaryString(o)
-      } else {
-        window.alert(
-          "L'image que vous venez de télécharger est trop lourde pour être un avatar, son poids dépasse 300 Ko. Veuillez réduire sa taille."
-        )
       }
     }
   },

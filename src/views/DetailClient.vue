@@ -10,7 +10,11 @@
       <div class="card-content">
         <div class="columns">
           <div class="column">
-            <label-value label="Avatar" value="avatar">
+            <label-value
+              label="Avatar"
+              value="avatar"
+              v-if="image || client.avatarUrl"
+            >
               <template v-slot:default>
                 <img v-if="image" :src="image" alt="avatar" />
                 <img v-else :src="client.avatarUrl" alt="avatar" />
