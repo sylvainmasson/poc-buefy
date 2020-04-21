@@ -6,13 +6,22 @@
         <b-icon icon="account" />
       </a>
       <div class="navbar-dropdown">
-        <a class="navbar-item" @click="deconnexion">
+        <a
+          class="navbar-item"
+          @click="deconnexion"
+          data-testid="bouton-deconnexion"
+        >
           Déconnexion
         </a>
       </div>
     </div>
     <div class="navbar-item" v-if="!isAuthenticated">
-      <a class="button is-link" @click="connexion" v-if="!isAuthenticated">
+      <a
+        class="button is-link"
+        @click="connexion"
+        v-if="!isAuthenticated"
+        data-testid="bouton-connexion"
+      >
         <strong>Connexion</strong>
       </a>
     </div>
@@ -20,16 +29,18 @@
 </template>
 
 <script>
-import store from '@/store'
 import { mapGetters } from 'vuex'
 
 export default {
   methods: {
     connexion() {
-      store.dispatch('fetchUser', Math.floor(Math.random() * Math.floor(20)))
+      this.$store.dispatch(
+        'fetchUser',
+        Math.floor(Math.random() * Math.floor(20))
+      )
     },
     deconnexion() {
-      store.dispatch('disconnectUser')
+      this.$store.dispatch('disconnectUser')
       this.$router.push('/')
     }
   },
