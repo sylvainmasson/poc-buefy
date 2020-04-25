@@ -1,7 +1,7 @@
 import { NotificationProgrammatic as Notification } from 'buefy'
 
 const messageEnregistrement = 'Enregistrement effectué avec succès'
-const messageSuppression = 'Suppression effectué avec succès'
+const messageSuppression = 'Suppression effectuée avec succès'
 const success = 'is-success'
 const warning = 'is-warning'
 const error = 'is-danger'
@@ -9,6 +9,7 @@ const error = 'is-danger'
 function notificationOpen(notification) {
   Notification.open({
     duration: 5000,
+    position: 'is-bottom-right',
     message: notification.message,
     type: notification.type,
     hasIcon: true,

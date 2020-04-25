@@ -192,7 +192,14 @@ export default {
     },
     remove(client) {
       if (client) {
-        ClientService.deleteClient(client.id).then(this.getClients())
+        ClientService.deleteClient(client.id)
+          .then(() => {
+            this.getClients()
+            this.$store.dispatch('addNotificationSuccessDelete')
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       }
     },
     openDetails(row) {
