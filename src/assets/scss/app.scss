@@ -60,6 +60,10 @@ $colors: map-merge($colors, $addColors);
 
 // Buefy custom styles
 
+.navbar {
+  box-shadow: 0 2px 4px -1px rgba(10, 10, 10, 0.1),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
 // Card and table
 .card {
   // Par défaut, buefy
@@ -86,11 +90,12 @@ $colors: map-merge($colors, $addColors);
 // Generic
 .navbar-item,
 .navbar-link {
-  color: rgba(0, 0, 0, 0.6) !important;
+  // color: rgba(0, 0, 0, 0.6) !important;
+  color: $grey !important;
 }
 
 .hero-body {
-  padding: 4.5em 1.5rem !important;
+  padding: 4.5rem 1.5rem !important;
 }
 
 .logo {
@@ -105,6 +110,14 @@ $colors: map-merge($colors, $addColors);
 
 .notification {
   padding: 0.5rem 2.25rem 0.5rem 0.5rem;
+}
+
+.notices.is-bottom {
+  padding-bottom: 60px;
+}
+
+.notices.is-top {
+  padding-top: 60px;
 }
 
 @media screen and (max-width: 768px) {

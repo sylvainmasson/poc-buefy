@@ -1,31 +1,29 @@
 <template>
-  <div class="navbar-start">
-    <div class="navbar-item has-dropdown is-hoverable" v-if="isAuthenticated">
-      <a class="navbar-link">
-        {{ authenticatedUser.nomPrenom }} ({{ authenticatedUser.matricule }})
-        <b-icon icon="account" />
-      </a>
-      <div class="navbar-dropdown">
+  <b-navbar>
+    <b-navbar-dropdown hoverable v-if="isAuthenticated">
+      <template slot="label" data-testid="label-utilisateur">
+        <span>
+          {{ authenticatedUser.nomPrenom }} ({{ authenticatedUser.matricule }})
+          <b-icon icon="account" />
+        </span>
+      </template>
+      <b-navbar-item @click.native="deconnexion" data-testid="deconnexion">
+        Déconnexion
+      </b-navbar-item>
+    </b-navbar-dropdown>
+    <b-navbar-item tag="div" v-if="!isAuthenticated">
+      <div>
         <a
-          class="navbar-item"
-          @click="deconnexion"
-          data-testid="bouton-deconnexion"
+          class="button is-link"
+          @click="connexion"
+          v-if="!isAuthenticated"
+          data-testid="bouton-connexion"
         >
-          Déconnexion
+          <strong>Connexion</strong>
         </a>
       </div>
-    </div>
-    <div class="navbar-item" v-if="!isAuthenticated">
-      <a
-        class="button is-link"
-        @click="connexion"
-        v-if="!isAuthenticated"
-        data-testid="bouton-connexion"
-      >
-        <strong>Connexion</strong>
-      </a>
-    </div>
-  </div>
+    </b-navbar-item>
+  </b-navbar>
 </template>
 
 <script>

@@ -34,8 +34,10 @@ describe("Connexion.vue, pas d'utilisateur authentifié", () => {
 
   it('Should not render user and disconnect, if not authenticated', () => {
     const wrapper = shallowMount(Connexion, { store, localVue })
-    expect(wrapper.find('a[class="navbar-link"]').exists()).toBe(false)
-    expect(wrapper.find('a[class="navbar-item"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="label-utilisateur"]').exists()).toBe(
+      false
+    )
+    expect(wrapper.find('[data-testid="deconnexion"]').exists()).toBe(false)
   })
 
   it('Should render connection button, if not authenticated', () => {
@@ -81,12 +83,16 @@ describe('Connexion.vue, utilisateur authentifié', () => {
 
   it('Should render user and disconnect, if authenticated', () => {
     const wrapper = shallowMount(Connexion, { store, localVue })
-    expect(wrapper.find('a[class="navbar-link"]').exists()).toBe(true)
-    expect(wrapper.find('a[class="navbar-link"]').text()).toEqual(
+    expect(wrapper.find('[data-testid="label-utilisateur"]').exists()).toBe(
+      true
+    )
+    expect(wrapper.find('[data-testid="label-utilisateur"]').text()).toEqual(
       'nomPrenom (matricule)'
     )
-    expect(wrapper.find('a[class="navbar-item"]').exists()).toBe(true)
-    expect(wrapper.find('a[class="navbar-item"]').text()).toEqual('Déconnexion')
+    expect(wrapper.find('[data-testid="deconnexion"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="deconnexion"]').text()).toEqual(
+      'Déconnexion'
+    )
   })
 
   it('Shoudl disconnect and go to home, if disconnection button triggered', () => {
@@ -96,7 +102,7 @@ describe('Connexion.vue, utilisateur authentifié', () => {
       router
     })
     const spy = jest.spyOn(router, 'push')
-    wrapper.find('[data-testid="bouton-deconnexion"]').trigger('click')
+    wrapper.find('[data-testid="deconnexion"]').trigger('click')
     expect(spy).toBeCalledWith('/')
     expect(actions.disconnectUser).toHaveBeenCalled
   })
