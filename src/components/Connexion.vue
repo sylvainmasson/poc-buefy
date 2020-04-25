@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <div class="navbar-start">
     <b-navbar-dropdown hoverable v-if="isAuthenticated">
       <template slot="label" data-testid="label-utilisateur">
         <span>
@@ -23,7 +23,7 @@
         </a>
       </div>
     </b-navbar-item>
-  </b-navbar>
+  </div>
 </template>
 
 <script>
