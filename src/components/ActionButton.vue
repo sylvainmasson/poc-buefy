@@ -1,39 +1,37 @@
 <template>
   <div class="field has-addons">
-    <p class="control">
-      <b-button
-        type="is-success is-small"
-        icon-right="eye"
-        title="Voir"
-        v-if="isReadable"
-        v-on:click="$emit('click-read')"
-        data-testid="button-read"
-      />
-    </p>
-    <p class="control">
-      <b-button
-        type="is-link is-small"
-        icon-right="pencil"
-        title="Modifier"
-        v-if="isEditable"
-        v-on:click="$emit('click-edit')"
-        data-testid="button-modify"
-      />
-    </p>
-    <p class="control">
-      <b-button
-        type="is-danger is-small"
-        icon-right="delete"
-        title="Supprimer"
-        v-if="isDeletable"
-        v-on:click="remove"
-        data-testid="button-delete"
-      />
-    </p>
+    <slot name="before" />
+    <base-button
+      type="is-success is-small"
+      icon-right="eye"
+      title="Voir"
+      v-if="isReadable"
+      v-on:click="$emit('click-read')"
+      data-testid="button-read"
+    />
+    <base-button
+      type="is-link is-small"
+      icon-right="pencil"
+      title="Modifier"
+      v-if="isEditable"
+      v-on:click="$emit('click-edit')"
+      data-testid="button-modify"
+    />
+    <base-button
+      type="is-danger is-small"
+      icon-right="delete"
+      title="Supprimer"
+      v-if="isDeletable"
+      v-on:click="remove"
+      data-testid="button-delete"
+    />
+    <slot name="after" />
   </div>
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
   name: 'ActionButton',
   props: {
@@ -65,6 +63,9 @@ export default {
       }
       return ''
     }
+  },
+  components: {
+    BaseButton
   }
 }
 </script>

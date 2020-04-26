@@ -1,33 +1,35 @@
 <template>
   <div class="navbar-start">
-    <b-navbar-dropdown hoverable v-if="isAuthenticated">
-      <template slot="label" data-testid="label-utilisateur">
-        <span>
-          {{ authenticatedUser.nomPrenom }} ({{ authenticatedUser.matricule }})
-          <b-icon icon="account" />
-        </span>
-      </template>
-      <b-navbar-item @click.native="deconnexion" data-testid="deconnexion">
-        Déconnexion
-      </b-navbar-item>
-    </b-navbar-dropdown>
-    <b-navbar-item tag="div" v-if="!isAuthenticated">
-      <div>
-        <a
-          class="button is-link"
-          @click="connexion"
-          v-if="!isAuthenticated"
-          data-testid="bouton-connexion"
-        >
-          <strong>Connexion</strong>
+    <div class="navbar-item has-dropdown is-hoverable" v-if="isAuthenticated">
+      <a class="navbar-link" data-testid="label-utilisateur">
+        {{ authenticatedUser.nomPrenom }} ({{ authenticatedUser.matricule }})
+        <b-icon icon="account" />
+      </a>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" @click="deconnexion" data-testid="deconnexion">
+          Déconnexion
         </a>
       </div>
-    </b-navbar-item>
+    </div>
+    <div class="navbar-item" v-if="!isAuthenticated">
+      <base-button
+        type="is-link"
+        title="Connexion"
+        @click.native="connexion"
+        v-if="!isAuthenticated"
+        data-testid="bouton-connexion"
+      >
+        <template slot="libelle">
+          <strong>Connexion</strong>
+        </template>
+      </base-button>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import BaseButton from '@/components/BaseButton'
 
 export default {
   methods: {
@@ -44,6 +46,9 @@ export default {
   },
   computed: {
     ...mapGetters(['authenticatedUser', 'isAuthenticated'])
+  },
+  components: {
+    BaseButton
   }
 }
 </script>

@@ -11,7 +11,7 @@
       </b-navbar-item>
     </template>
     <template slot="start" v-if="isAuthenticated">
-      <b-navbar-item @click="$router.push('/clients')">
+      <b-navbar-item @click="$router.push({ name: 'Clients' })">
         Client
       </b-navbar-item>
       <b-navbar-dropdown label="Info" hoverable>

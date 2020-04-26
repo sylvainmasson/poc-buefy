@@ -12,6 +12,7 @@
         ref="clients"
         :data="clients"
         :paginated="pagination.isPaginated"
+        :sticky-header="isLoading"
         :pagination-simple="pagination.isSimplePagination"
         :default-sort="['nom', 'asc']"
         :per-page="pagination.perPage"
@@ -24,7 +25,7 @@
         detailed
         @details-open="openDetails"
       >
-        <template slot-scope="props">
+        <template v-slot="props">
           <b-table-column
             field="id"
             label="ID"
