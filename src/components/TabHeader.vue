@@ -18,7 +18,7 @@
         type="is-info"
         icon-left="file"
         title="Exporter en CSV"
-        libelle="Expoter"
+        libelle="Exporter"
         v-if="isExportable"
         v-on:click="$emit('click-export')"
         data-testid="button-export"

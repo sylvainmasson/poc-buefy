@@ -5,7 +5,8 @@
         <b-switch
           type="is-link"
           v-model="pagination.isPaginated"
-          @input="change"
+          @input.native="change"
+          data-testid="pagination"
           >Pagination</b-switch
         >
       </div>
@@ -14,14 +15,16 @@
           type="is-link"
           v-model="pagination.isSimplePagination"
           :disabled="!pagination.isPaginated"
-          @input="change"
+          @input.native="change"
+          data-testid="pagination-simple"
           >Pagination simple</b-switch
         >
       </div>
       <b-select
         v-model="pagination.perPage"
         :disabled="!pagination.isPaginated"
-        @input="change"
+        @input.native="change"
+        data-testid="per-page"
       >
         <option value="5">5 par page</option>
         <option value="10">10 par page</option>
