@@ -17,17 +17,17 @@ function notificationOpen(notification) {
   })
 }
 
-export const state = {
+const state = {
   notification: {}
 }
 
-export const mutations = {
+const mutations = {
   SET_NOTIFICATION(state, notification) {
     state.notification = notification
   }
 }
 
-export const actions = {
+const actions = {
   addNotificationSuccessSave({ commit }) {
     const notification = { message: messageEnregistrement, type: success }
     commit('SET_NOTIFICATION', notification)
@@ -66,4 +66,15 @@ export const actions = {
     commit('SET_NOTIFICATION', notification)
     notificationOpen(notification)
   }
+}
+
+export default {
+  messageEnregistrement,
+  messageSuppression,
+  success,
+  warning,
+  error,
+  state,
+  actions,
+  mutations
 }

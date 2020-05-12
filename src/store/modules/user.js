@@ -1,17 +1,17 @@
 import UserService from '@/services/UserService.js'
 import router from '@/router'
 
-export const state = {
+const state = {
   user: {},
   isAuthenticated: false
 }
 
-export const getters = {
+const getters = {
   authenticatedUser: state => state.user,
   isAuthenticated: state => state.isAuthenticated
 }
 
-export const mutations = {
+const mutations = {
   SET_USER(state, user) {
     state.user = user
   },
@@ -20,7 +20,7 @@ export const mutations = {
   }
 }
 
-export const actions = {
+const actions = {
   fetchUser({ commit, state, dispatch }, id) {
     if (id == state.user.id) {
       return state.user
@@ -45,4 +45,11 @@ export const actions = {
     commit('SET_USER', {})
     commit('SET_AUTHENTICATED', false)
   }
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
 }

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as user from '@/store/modules/user'
-import * as pagination from '@/store/modules/pagination'
-import * as alert from '@/store/modules/alert'
+import user from '@/store/modules/user'
+import pagination from '@/store/modules/pagination'
+import alert from '@/store/modules/alert'
 import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)

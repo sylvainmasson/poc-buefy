@@ -1,4 +1,4 @@
-export const state = {
+const state = {
   paginations: [],
   defaultPagination: {
     isPaginated: true,
@@ -7,7 +7,7 @@ export const state = {
   }
 }
 
-export const mutations = {
+const mutations = {
   /**
    * Mise à jour ou ajout de la pagination en paramètre
    * @param {*} state
@@ -24,7 +24,7 @@ export const mutations = {
   }
 }
 
-export const getters = {
+const getters = {
   /**
    * Récupération de la pagination par rapport à id
    * @param {*} state
@@ -44,4 +44,10 @@ export const getters = {
       return newPagination
     }
   }
+}
+
+export default {
+  state,
+  getters,
+  mutations
 }
