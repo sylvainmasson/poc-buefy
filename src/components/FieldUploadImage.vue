@@ -32,7 +32,6 @@ export default {
         // Récupération du contenu du fichier
         var reader = new FileReader()
         reader.onload = e => {
-          console.log(e.target.result)
           this.$emit('upload', {
             imageData: e.target.result,
             libelleBouton: "Mettre à jour l'avatar"

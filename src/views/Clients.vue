@@ -48,9 +48,13 @@
             searchable
             >{{ props.row.entreprise.libelle }}</b-table-column
           >
-          <b-table-column field="city" label="Commune" sortable searchable>{{
-            props.row.adresse.commune
-          }}</b-table-column>
+          <b-table-column
+            field="adresse.commune"
+            label="Commune"
+            sortable
+            searchable
+            >{{ props.row.adresse.commune }}</b-table-column
+          >
           <b-table-column
             field="birthdate"
             label="Date de naissance"
@@ -195,6 +199,10 @@ export default {
       if (client) {
         ClientService.deleteClient(client.id)
           .then(() => {
+            // On vide les filtres de tri du tableau
+            Object.keys(this.$refs['clients']._data.filters).forEach(
+              e => (this.$refs['clients']._data.filters[e] = '')
+            )
             this.getClients()
             this.$store.dispatch('addNotificationSuccessDelete')
           })
