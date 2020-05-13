@@ -16,6 +16,7 @@
             />
             <field-upload-image
               :libelleBouton="boutonAvatar"
+              :maxSize="800000"
               @upload="upload"
             />
             <b-field label="Civilité *" label-for="civilite" horizontal>

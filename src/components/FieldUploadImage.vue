@@ -20,11 +20,15 @@ export default {
     libelleBouton: {
       type: String,
       required: true
+    },
+    maxSize: {
+      type: Number,
+      required: true
     }
   },
   watch: {
     file: function(o) {
-      if (o.size < 300000) {
+      if (o.size < this.maxSize) {
         // Récupération du contenu du fichier
         var reader = new FileReader()
         reader.onload = e => {
@@ -36,8 +40,9 @@ export default {
         }
         reader.readAsBinaryString(o)
       } else {
+        const maxSizeKo = this.maxSize / 1000
         window.alert(
-          "L'image que vous venez de télécharger est trop lourde pour être un avatar, son poids dépasse 300 Ko. Veuillez réduire sa taille."
+          `L'image que vous venez de télécharger est trop lourde pour être un avatar, son poids dépasse ${maxSizeKo} Ko. Veuillez réduire sa taille.`
         )
       }
     }
