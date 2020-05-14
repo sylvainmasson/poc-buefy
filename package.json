@@ -7,7 +7,9 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --verbose --coverage=true",
     "lint": "vue-cli-service lint",
-    "db": "cd server && npm install && json-server index.js"
+    "db": "cd server && npm install && json-server index.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -39,7 +41,8 @@
     "prettier": "^1.19.1",
     "sass-loader": "^7.0.1",
     "vue-cli-plugin-buefy": "~0.3.7",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.5.0"
   },
   "eslintConfig": {
     "root": true,
