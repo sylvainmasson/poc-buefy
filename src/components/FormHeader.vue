@@ -1,10 +1,10 @@
 <template>
   <header class="card-header level">
     <p class="card-header-title level-left">
-      <span v-if="modification"
+      <span v-if="modification" data-testid="entete-modification"
         >{{ libelleModification }} : {{ libelleEnTete }}</span
       >
-      <span v-else>{{ libelleCreation }}</span>
+      <span v-else data-testid="entete-creation">{{ libelleCreation }}</span>
     </p>
   </header>
 </template>

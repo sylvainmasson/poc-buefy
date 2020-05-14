@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container">
-          <router-view />
-        </div>
+    <main>
+      <Navbar></Navbar>
+      <div class="container">
+        <section class="hero">
+          <div class="hero-body">
+            <div class="container">
+              <router-view />
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-    <Footer :version="version"></Footer>
+      <Footer :version="version"></Footer>
+    </main>
   </div>
 </template>
 <script>

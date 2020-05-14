@@ -11,10 +11,11 @@
       <b-table
         ref="clients"
         :data="clients"
-        :paginated="isPaginated"
-        :pagination-simple="isPaginationSimple"
+        :paginated="pagination.isPaginated"
+        :sticky-header="isLoading"
+        :pagination-simple="pagination.isSimplePagination"
         :default-sort="['nom', 'asc']"
-        :per-page="perPage"
+        :per-page="pagination.perPage"
         :narrowed="true"
         :loading="isLoading"
         aria-next-label="Page suivante"
@@ -24,7 +25,7 @@
         detailed
         @details-open="openDetails"
       >
-        <template slot-scope="props">
+        <template v-slot="props">
           <b-table-column
             field="id"
             label="ID"
@@ -47,9 +48,13 @@
             searchable
             >{{ props.row.entreprise.libelle }}</b-table-column
           >
-          <b-table-column field="city" label="Commune" sortable searchable>{{
-            props.row.adresse.commune
-          }}</b-table-column>
+          <b-table-column
+            field="adresse.commune"
+            label="Commune"
+            sortable
+            searchable
+            >{{ props.row.adresse.commune }}</b-table-column
+          >
           <b-table-column
             field="birthdate"
             label="Date de naissance"
@@ -111,62 +116,10 @@
           </article>
         </template>
         <template slot="bottom-left">
-          <section>
-            <b-field grouped group-multiline>
-              <div class="control is-flex">
-                <b-switch type="is-link" v-model="isPaginated"
-                  >Pagination</b-switch
-                >
-              </div>
-              <div class="control is-flex">
-                <b-switch
-                  type="is-link"
-                  v-model="isPaginationSimple"
-                  :disabled="!isPaginated"
-                  >Pagination simple</b-switch
-                >
-              </div>
-              <b-select v-model="perPage" :disabled="!isPaginated">
-                <option value="5">5 par page</option>
-                <option value="10">10 par page</option>
-                <option value="15">15 par page</option>
-                <option value="20">20 par page</option>
-                <option value="50">50 par page</option>
-                <option value="100">100 par page</option>
-              </b-select>
-            </b-field>
-          </section>
+          <pagination :id="id" />
         </template>
-        <template slot="footer" v-if="!isPaginated">
-          <section>
-            <b-field grouped group-multiline>
-              <div class="control is-flex">
-                <b-switch type="is-link" v-model="isPaginated"
-                  >Pagination</b-switch
-                >
-              </div>
-              <div class="control is-flex">
-                <b-switch
-                  type="is-link"
-                  v-model="isPaginationSimple"
-                  :disabled="!isPaginated"
-                  >Pagination simple</b-switch
-                >
-              </div>
-              <b-select
-                aria-label="Choix du nombre de résultats par page"
-                v-model="perPage"
-                :disabled="!isPaginated"
-              >
-                <option value="5">5 par page</option>
-                <option value="10">10 par page</option>
-                <option value="15">15 par page</option>
-                <option value="20">20 par page</option>
-                <option value="50">50 par page</option>
-                <option value="100">100 par page</option>
-              </b-select>
-            </b-field>
-          </section>
+        <template slot="footer" v-if="!pagination.isPaginated">
+          <pagination :id="id" />
         </template>
       </b-table>
     </div>
@@ -185,12 +138,10 @@ export default {
   name: 'Clients',
   data() {
     return {
+      id: 'clients',
       clients: [],
-      perPage: 15,
       avatar: null,
       isLoading: false,
-      isPaginated: false,
-      isPaginationSimple: false,
       fields: {
         ID: 'id',
         Civilité: 'civilite',
@@ -227,7 +178,7 @@ export default {
           this.isLoading = false
         })
         .catch(e => {
-          console.log(e)
+          this.$store.dispatch('addNotificationError', e.response.data)
           this.isLoading = false
         })
     },
@@ -246,7 +197,18 @@ export default {
     },
     remove(client) {
       if (client) {
-        ClientService.deleteClient(client.id).then(this.getClients())
+        ClientService.deleteClient(client.id)
+          .then(() => {
+            // On vide les filtres de tri du tableau
+            Object.keys(this.$refs['clients']._data.filters).forEach(
+              e => (this.$refs['clients']._data.filters[e] = '')
+            )
+            this.getClients()
+            this.$store.dispatch('addNotificationSuccessDelete')
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       }
     },
     openDetails(row) {
@@ -314,11 +276,16 @@ export default {
       return AdresseService.setAdresseLabel(adresse)
     }
   },
-  mounted() {
+  created() {
     this.getClients()
   },
   components: {
     MapMarker
+  },
+  computed: {
+    pagination() {
+      return this.$store.getters.getPaginationById(this.id)
+    }
   }
 }
 </script>

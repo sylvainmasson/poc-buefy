@@ -10,18 +10,15 @@
       <div class="card-content">
         <form id="signUpForm" @submit.prevent="submit">
           <section>
-            <b-field label="Avatar" v-if="image || client.avatarUrl" horizontal>
-              <img v-if="image" :src="image" alt="avatar" />
-              <img v-else :src="client.avatarUrl" alt="avatar" />
-            </b-field>
-            <b-field class="file" horizontal>
-              <b-upload v-model="file" accept="image/png, image/jpeg">
-                <a class="button is-link">
-                  <b-icon icon="upload"></b-icon>
-                  <span>{{ boutonAvatar }}</span>
-                </a>
-              </b-upload>
-            </b-field>
+            <field-avatar
+              :imageData="imageData"
+              :avatarUrl="client.avatarUlr"
+            />
+            <field-upload-image
+              :libelleBouton="boutonAvatar"
+              :maxSize="800000"
+              @upload="upload"
+            />
             <b-field label="Civilité *" label-for="civilite" horizontal>
               <b-select
                 v-model="client.civilite"
@@ -38,58 +35,50 @@
               </b-select>
             </b-field>
             <!-- Mettre en majuscule le premier caractère -->
-            <b-field label="Nom *" label-for="nom" horizontal>
-              <b-input
-                id="nom"
-                v-model="client.nom"
-                required
-                maxlength="10"
-                :has-counter="false"
-                @input="changeNom"
-              ></b-input>
-            </b-field>
-            <b-field label="Prénom *" label-for="prenom" horizontal>
-              <b-input
-                id="prenom"
-                v-model="client.prenom"
-                required
-                maxlength="100"
-                :has-counter="false"
-                @input="changePrenom"
-              ></b-input>
-            </b-field>
-            <b-field label="Email *" label-for="email" horizontal>
-              <b-input
-                id="email"
-                type="email"
-                v-model="client.email"
-                required
-                icon="email"
-              ></b-input>
-            </b-field>
-            <b-field label="Téléphone" label-for="telephone" horizontal>
-              <b-input
-                id="telephone"
-                type="tel"
-                v-model="client.telephonenumber"
-                icon="phone"
-                pattern="[0-9]{10}"
-                validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)"
-              ></b-input>
-            </b-field>
-            <b-field
-              label="Date de naissance *"
-              label-for="birthdate"
-              horizontal
-            >
-              <b-input
-                id="birthdate"
-                type="date"
-                v-model="client.birthdate"
-                required
-                icon="calendar"
-              ></b-input>
-            </b-field>
+            <field-input
+              id="nom"
+              label="Nom"
+              v-model="client.nom"
+              type="text"
+              required="true"
+              maxlength="50"
+              :has-counter="false"
+              @input="changeNom"
+            />
+            <field-input
+              id="prenom"
+              label="Prénom"
+              v-model="client.prenom"
+              type="text"
+              required="true"
+              maxlength="100"
+              :has-counter="false"
+              @input="changePrenom"
+            />
+            <field-input
+              id="email"
+              label="Email"
+              v-model="client.email"
+              type="email"
+              icon="email"
+              required="true"
+            />
+            <field-input
+              id="telephone"
+              label="Téléphone"
+              v-model="client.telephonenumber"
+              icon="phone"
+              pattern="[0-9]{10}"
+              validation-message="Format attendu : 10 chiffres sans espaces (ex: 0240991234)"
+            />
+            <field-input
+              id="birthdate"
+              label="Date de naissance"
+              v-model="client.birthdate"
+              type="date"
+              icon="calendar"
+              required="true"
+            />
             <field-adresse
               :required="true"
               :adresse="client.adresse"
@@ -134,18 +123,12 @@
                 </template>
               </b-taginput>
             </b-field>
-            <b-field label="Commentaire" label-for="commentaire" horizontal>
-              <vue-editor
-                id="commentaire"
-                v-model="client.commentaire"
-                :editorToolbar="customToolbar"
-              ></vue-editor>
-            </b-field>
-            <form-footer
-              :routeRetour="routeRetour"
-              :changement="changement"
-              :readOnly="false"
+            <field-richtext
+              id="commentaire"
+              label="Commentaire"
+              v-model="client.commentaire"
             />
+            <form-footer :routeRetour="routeRetour" :readOnly="false" />
           </section>
         </form>
       </div>
@@ -158,7 +141,7 @@ import ClientService from '../services/ClientService'
 import EntrepriseService from '../services/EntrepriseService'
 import AvatarService from '../services/AvatarService'
 import UtilService from '../services/UtilService'
-import customToolbar from '../constants/CustomToolbar'
+import AnnulationService from '../services/AnnulationService'
 
 export default {
   name: 'FicheClient',
@@ -179,39 +162,45 @@ export default {
       modification: false,
       changement: false,
       premierChargement: false,
-      file: null,
-      fileData: null,
+      enregistrement: false,
+      imageData: null,
       boutonAvatar: "Ajouter l'avatar",
-      image: null,
-      // Paramétrage des options du champ de texte riche
-      customToolbar: customToolbar,
       routeRetour: {
         name: 'Clients'
       }
     }
   },
+  props: ['id'],
   methods: {
     getClient(id) {
-      ClientService.getClient(id).then(response => {
-        this.client = response.data
-        this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
-        this.modification = true
-        if (this.client.avatarId || this.client.avatarUrl) {
-          this.boutonAvatar = "Mettre à jour l'avatar"
-        }
-        if (this.client.avatarId) {
-          // Chargement de la photo à partir de la base des avatars
-          this.getAvatar(this.client.avatarId)
-        }
-        if (this.client.entreprise) {
-          this.libelleEntreprise = this.client.entreprise.libelle
-        }
-      })
+      ClientService.getClient(id)
+        .then(response => {
+          this.client = response.data
+          this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
+          this.modification = true
+          if (this.client.avatarId || this.client.avatarUrl) {
+            this.boutonAvatar = "Mettre à jour l'avatar"
+          }
+          if (this.client.avatarId) {
+            // Chargement de la photo à partir de la base des avatars
+            this.getAvatar(this.client.avatarId)
+          }
+          if (this.client.entreprise) {
+            this.libelleEntreprise = this.client.entreprise.libelle
+          }
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     getAvatar(id) {
-      AvatarService.getAvatar(id).then(response => {
-        this.image = 'data:image;base64,' + btoa(response.data.image)
-      })
+      AvatarService.getAvatar(id)
+        .then(response => {
+          this.imageData = response.data.image
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     /**
      * Recherche des entreprises, déclenché par le composant d'autocomplétion
@@ -261,17 +250,21 @@ export default {
       this.client.entreprise = {}
     },
     searchContact(term) {
-      ClientService.searchClient(term).then(response => {
-        const clients = response.data
-        this.filteredContacts = clients
-          .filter(client => client.id !== this.client.id)
-          .map(client => {
-            return {
-              id: client.id,
-              nomComplet: `${client.nom} ${client.prenom}`
-            }
-          })
-      })
+      ClientService.searchClient(term)
+        .then(response => {
+          const clients = response.data
+          this.filteredContacts = clients
+            .filter(client => client.id !== this.client.id)
+            .map(client => {
+              return {
+                id: client.id,
+                nomComplet: `${client.nom} ${client.prenom}`
+              }
+            })
+        })
+        .catch(e => {
+          this.$store.dispatch('addNotificationError', e.response.data)
+        })
     },
     /**
      * Fonction déclenchée sur le changement du nom.
@@ -293,18 +286,39 @@ export default {
       return UtilService.notIn(this.client.contacts, item, 'id')
     },
     /**
+     * Gestion de la mise à jour de l'image
+     * @param {Object} event fichier image et libellé du bouton à mettre à jour
+     */
+    upload(event) {
+      this.imageData = event.imageData
+      this.boutonAvatar = event.libelleBouton
+    },
+    /**
      * Enregistrement du client
      */
     save() {
       if (this.modification) {
-        ClientService.saveClient(this.client).then(
-          this.$router.push(this.routeRetour)
-        )
+        ClientService.saveClient(this.client)
+          .then(() => {
+            this.gestionRetour()
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       } else {
-        ClientService.addClient(this.client).then(
-          this.$router.push(this.routeRetour)
-        )
+        ClientService.addClient(this.client)
+          .then(() => {
+            this.gestionRetour()
+          })
+          .catch(e => {
+            this.$store.dispatch('addNotificationError', e.response.data)
+          })
       }
+    },
+    gestionRetour() {
+      this.enregistrement = true
+      this.$store.dispatch('addNotificationSuccessSave')
+      this.$router.push(this.routeRetour)
     },
     submit() {
       // Vérification qu'une entreprise a bien été saisie
@@ -313,18 +327,19 @@ export default {
         this.$refs.entreprise.focus()
       } else {
         // Enregistrement de l'avatar si l'utilisateur a téléchargé une image
-        if (this.fileData) {
+        if (this.imageData) {
           const avatar = {}
-          avatar.image = this.fileData
+          avatar.image = this.imageData
           AvatarService.addAvatar(avatar)
             .then(response => {
+              // Récupération de l'id de l'avatar
               if (response.data.id) {
                 this.client.avatarId = response.data.id
               }
               this.save()
             })
             .catch(e => {
-              console.log(e)
+              this.$store.dispatch('addNotificationError', e.response.data)
             })
         } else {
           this.save()
@@ -333,8 +348,8 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.params.id) {
-      this.getClient(this.$route.params.id)
+    if (this.id) {
+      this.getClient(this.id)
       // Mettre le focus sur le premier élément du formulaire
       this.$refs.civilite.focus()
     }
@@ -352,23 +367,16 @@ export default {
           this.premierChargement = true
         }
       }
-    },
-    file: function(o) {
-      if (o.size < 300000) {
-        // Récupération du contenu du fichier
-        var reader = new FileReader()
-        reader.onload = e => {
-          this.fileData = e.target.result
-          this.image = 'data:image/jpeg;base64,' + btoa(this.fileData)
-          this.boutonAvatar = "Mettre à jour l'avatar"
-        }
-        reader.readAsBinaryString(o)
-      } else {
-        window.alert(
-          "L'image que vous venez de télécharger est trop lourde pour être un avatar, son poids dépasse 300 Ko. Veuillez réduire sa taille."
-        )
-      }
     }
+  },
+  beforeRouteLeave(routeTo, routeFrom, next) {
+    AnnulationService.annulation(
+      routeTo,
+      routeFrom,
+      next,
+      this.changement,
+      this.enregistrement
+    )
   }
 }
 </script>

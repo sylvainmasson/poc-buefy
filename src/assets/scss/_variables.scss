@@ -3,43 +3,45 @@
 
 // Colors
 
-$black:        hsl(0, 0%, 4%) !default;
-$black-bis:    hsl(0, 0%, 7%) !default;
-$black-ter:    hsl(0, 0%, 14%) !default;
+$black: hsl(0, 0%, 4%) !default;
+$black-bis: hsl(0, 0%, 7%) !default;
+$black-ter: hsl(0, 0%, 14%) !default;
 
-$grey-darker:  hsl(0, 0%, 21%) !default;
-$grey-dark:    hsl(0, 0%, 29%) !default;
-$grey:         hsl(0, 0%, 48%) !default;
-$grey-light:   hsl(0, 0%, 71%) !default;
+$grey-darker: hsl(0, 0%, 21%) !default;
+$grey-dark: hsl(0, 0%, 29%) !default;
+$grey: hsl(0, 0%, 40%);
+$grey-light: hsl(0, 0%, 71%) !default;
 $grey-lighter: hsl(0, 0%, 86%) !default;
 
-$white-ter:    hsl(0, 0%, 96%) !default;
-$white-bis:    hsl(0, 0%, 98%) !default;
-$white:        hsl(0, 0%, 100%) !default;
+$white-ter: hsl(0, 0%, 96%) !default;
+$white-bis: hsl(0, 0%, 98%) !default;
+$white: hsl(0, 0%, 100%) !default;
 
-$orange:       hsl(14,  100%, 53%) !default;
-$yellow:       hsl(48,  100%, 67%) !default;
+$orange: hsl(14, 100%, 53%) !default;
+$yellow: hsl(48, 100%, 67%) !default;
 // vert buefy hsl(141, 71%,  48%)
 // vert bulma hsl(141, 53%, 53%)
 // vert bootstrap hsl(134, 61%, 41%)
-$green:        hsl(132, 100%, 27%);
+$green: hsl(132, 100%, 27%);
 // turquoise -> primary hsl(171, 100%, 41%)
-$turquoise:    hsl(171, 100%, 38%);
+$turquoise: hsl(171, 100%, 38%);
 // cyan -> info buefy hsl(204, 86%,  53%) !default;
 // cyan bulma hsl(204, 71%,  53%);
 // cyan bootstrap hsl(188, 78%, 41%)
-$cyan:         hsl(192, 88%, 33%);
+$cyan: hsl(192, 88%, 33%);
 // blue -> link hsl(217, 71%,  53%)
-$blue:         hsl(217, 80%, 50%);
+$blue: hsl(217, 80%, 50%);
 // purple bulma hsl(271, 100%, 71%)
-$purple:       hsl(256, 60%, 56%);
+$purple: hsl(256, 60%, 56%);
 // rouge -> danger buefy hsl(348, 100%, 61%) !default;
 // rouge bulma hsl(348, 86%, 61%)
-$red:          hsl(348, 80%, 47%);
+$red: hsl(348, 80%, 47%);
 
 // Typography
 
-$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+$family-sans-serif: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  'Helvetica', 'Arial', sans-serif !default;
 $family-monospace: monospace !default;
 $render-mode: optimizeLegibility !default;
 
@@ -82,7 +84,6 @@ $speed: 86ms !default;
 // Flags
 
 $variable-columns: true !default;
-
 
 // The default Bulma derived variables are declared below
 

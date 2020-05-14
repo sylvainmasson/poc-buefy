@@ -1,57 +1,50 @@
 <template>
-  <nav
-    class="navbar is-light is-fixed-top"
+  <b-navbar
+    class="is-light is-fixed-top"
     role="navigation"
     aria-label="main navigation"
   >
-    <div class="navbar-brand">
-      <a class="navbar-item" @click="$router.push('/')">
+    <template slot="brand">
+      <b-navbar-item @click="$router.push('/')">
         <span class="titrebleu">Application</span>
         <span class="titrevert">exemple</span>
-      </a>
+      </b-navbar-item>
+    </template>
+    <template slot="start" v-if="isAuthenticated">
+      <b-navbar-item @click="$router.push({ name: 'Clients' })">
+        Client
+      </b-navbar-item>
+      <b-navbar-dropdown label="Info" hoverable>
+        <b-navbar-item>
+          Aide
+        </b-navbar-item>
+        <b-navbar-item>
+          Contact
+        </b-navbar-item>
+      </b-navbar-dropdown>
+    </template>
 
-      <!-- Menu burger -->
-      <!--<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>-->
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" @click="$router.push('/clients')">
-          Client
-        </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Menu déroulant
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Lien 1
-            </a>
-            <a class="navbar-item">
-              Lien 2
-            </a>
-            <a class="navbar-item">
-              Lien 3
-            </a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item">
-              Lien 4
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <a class="button is-link">
-            <strong>Connexion</strong>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+    <template slot="end">
+      <connexion />
+    </template>
+  </b-navbar>
 </template>
+
+<script>
+import Connexion from '@/components/Connexion'
+import { mapGetters } from 'vuex'
+
+export default {
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  components: {
+    Connexion
+  },
+  computed: {
+    ...mapGetters(['authenticatedUser', 'isAuthenticated'])
+  }
+}
+</script>

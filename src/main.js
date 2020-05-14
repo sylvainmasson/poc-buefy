@@ -17,6 +17,11 @@ import FormHeader from '@/components/FormHeader'
 import FormFooter from '@/components/FormFooter'
 import FieldAdresse from '@/components/FieldAdresse'
 import LabelValue from '@/components/LabelValue'
+import Pagination from '@/components/Pagination'
+import FieldInput from '@/components/FieldInput'
+import FieldRichText from '@/components/FieldRichText'
+import FieldUploadImage from '@/components/FieldUploadImage'
+import FieldAvatar from '@/components/FieldAvatar'
 
 Vue.use(Buefy)
 
@@ -33,6 +38,11 @@ Vue.component('form-header', FormHeader)
 Vue.component('form-footer', FormFooter)
 Vue.component('field-adresse', FieldAdresse)
 Vue.component('label-value', LabelValue)
+Vue.component('pagination', Pagination)
+Vue.component('field-input', FieldInput)
+Vue.component('field-richtext', FieldRichText)
+Vue.component('field-upload-image', FieldUploadImage)
+Vue.component('field-avatar', FieldAvatar)
 
 new Vue({
   router,

@@ -1,38 +1,50 @@
 <template>
   <div>
     <div class="field is-grouped is-grouped-right" v-if="readOnly">
-      <p class="control">
-        <b-button
-          type="is-primary"
-          icon-left="arrow-left"
-          title="Retour"
-          @click="retour"
-          >Retour</b-button
-        >
-      </p>
+      <base-button
+        type="is-primary"
+        icon-left="arrow-left"
+        title="Retour"
+        @click.native="retour"
+        data-testid="bouton-retour"
+      >
+        <template slot="libelle">
+          Retour
+        </template>
+      </base-button>
     </div>
     <div
       class="field is-grouped is-grouped-centered"
       style="margin-bottom:0px;"
       v-if="!readOnly"
     >
-      <p class="control">
-        <button class="button is-success" type="submit">
-          <span class="icon">
-            <i class="mdi mdi-check"></i>
-          </span>
-          <span><b>Valider</b></span>
-        </button>
-      </p>
-      <p class="control">
-        <b-button
+      <slot name="before" />
+      <slot name="buttons">
+        <p class="control">
+          <button
+            class="button is-success"
+            type="submit"
+            data-testid="bouton-valider"
+          >
+            <span class="icon">
+              <i class="mdi mdi-check"></i>
+            </span>
+            <span><b>Valider</b></span>
+          </button>
+        </p>
+        <base-button
           type="is-light"
           icon-left="arrow-left"
           title="Annuler"
-          @click="cancel"
-          >Annuler</b-button
+          @click.native="retour"
+          data-testid="bouton-annuler"
         >
-      </p>
+          <template slot="libelle">
+            Annuler
+          </template>
+        </base-button>
+      </slot>
+      <slot name="after" />
     </div>
     <div v-if="!readOnly">
       <span class="is-size-7"
@@ -43,14 +55,12 @@
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
   name: 'FormFooter',
   props: {
     readOnly: {
-      Boolean,
-      required: true
-    },
-    changement: {
       Boolean,
       required: true
     },
@@ -60,24 +70,12 @@ export default {
     }
   },
   methods: {
-    cancel() {
-      if (this.changement) {
-        this.$buefy.dialog.confirm({
-          title: 'Annulation',
-          message: 'Souhaitez vous abandonner les modifications apportées ?',
-          confirmText: 'Oui',
-          cancelText: 'Non',
-          type: 'is-warning',
-          hasIcon: true,
-          onConfirm: () => this.$router.push(this.routeRetour)
-        })
-      } else {
-        this.$router.push(this.routeRetour)
-      }
-    },
     retour() {
       this.$router.push(this.routeRetour)
     }
+  },
+  components: {
+    BaseButton
   }
 }
 </script>

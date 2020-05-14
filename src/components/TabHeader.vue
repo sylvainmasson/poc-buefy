@@ -1,38 +1,36 @@
 <template>
   <header class="card-header level">
-    <div class="card-header-title level-left">{{ title }}</div>
+    <div class="card-header-title level-left" data-testid="title">
+      {{ title }}
+    </div>
     <div class="card-header-title field has-addons level-right">
-      <p class="control">
-        <b-button
-          type="is-success"
-          icon-left="plus"
-          title="Ajouter"
-          v-if="isAdd"
-          v-on:click="$emit('click-add')"
-        >
-          <span class="is-hidden-mobile">
-            <b>Ajouter</b>
-          </span>
-        </b-button>
-      </p>
-      <p class="control">
-        <b-button
-          type="is-info"
-          icon-left="file"
-          title="Exporter en CSV"
-          v-if="isExportable"
-          v-on:click="$emit('click-export')"
-        >
-          <span class="is-hidden-mobile">
-            <b>Exporter</b>
-          </span>
-        </b-button>
-      </p>
+      <slot name="before" />
+      <base-button
+        title="Ajouter un enregistrement"
+        libelle="Ajouter"
+        type="is-success"
+        icon-left="plus"
+        v-if="isAdd"
+        v-on:click="$emit('click-add')"
+        data-testid="button-add"
+      />
+      <base-button
+        type="is-info"
+        icon-left="file"
+        title="Exporter en CSV"
+        libelle="Exporter"
+        v-if="isExportable"
+        v-on:click="$emit('click-export')"
+        data-testid="button-export"
+      />
+      <slot name="after" />
     </div>
   </header>
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
   name: 'TabHeader',
   props: {
@@ -42,6 +40,9 @@ export default {
     },
     isAdd: Boolean,
     isExportable: Boolean
+  },
+  components: {
+    BaseButton
   }
 }
 </script>

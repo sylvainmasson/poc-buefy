@@ -1,36 +1,37 @@
 <template>
   <div class="field has-addons">
-    <p class="control">
-      <b-button
-        type="is-success is-small"
-        icon-right="eye"
-        title="Voir"
-        v-if="isReadable"
-        v-on:click="$emit('click-read')"
-      />
-    </p>
-    <p class="control">
-      <b-button
-        type="is-link is-small"
-        icon-right="pencil"
-        title="Modifier"
-        v-if="isEditable"
-        v-on:click="$emit('click-edit')"
-      />
-    </p>
-    <p class="control">
-      <b-button
-        type="is-danger is-small"
-        icon-right="delete"
-        title="Supprimer"
-        v-if="isDeletable"
-        v-on:click="remove"
-      />
-    </p>
+    <slot name="before" />
+    <base-button
+      type="is-success is-small"
+      icon-right="eye"
+      title="Voir"
+      v-if="isReadable"
+      v-on:click="$emit('click-read')"
+      data-testid="button-read"
+    />
+    <base-button
+      type="is-link is-small"
+      icon-right="pencil"
+      title="Modifier"
+      v-if="isEditable"
+      v-on:click="$emit('click-edit')"
+      data-testid="button-modify"
+    />
+    <base-button
+      type="is-danger is-small"
+      icon-right="delete"
+      title="Supprimer"
+      v-if="isDeletable"
+      v-on:click="remove"
+      data-testid="button-delete"
+    />
+    <slot name="after" />
   </div>
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton'
+
 export default {
   name: 'ActionButton',
   props: {
@@ -39,14 +40,14 @@ export default {
     isDeletable: Boolean,
     libelle: {
       String,
-      required: true
+      required: false
     }
   },
   methods: {
     remove() {
       this.$buefy.dialog.confirm({
         title: 'Confirmation de suppression',
-        message: `Voulez vous supprimer cet élément : ${this.libelle} ?`,
+        message: this.messageSupression,
         confirmText: 'Oui',
         cancelText: 'Non',
         type: 'is-danger',
@@ -54,6 +55,17 @@ export default {
         onConfirm: () => this.$emit('click-delete')
       })
     }
+  },
+  computed: {
+    messageSupression() {
+      if (this.libelle) {
+        return `Voulez vous supprimer cet élément : ${this.libelle} ?`
+      }
+      return ''
+    }
+  },
+  components: {
+    BaseButton
   }
 }
 </script>
