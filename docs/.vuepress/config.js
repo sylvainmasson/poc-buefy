@@ -8,6 +8,7 @@ module.exports = {
       }
     ]
   ],
+  base: '/poc-buefy/',
   title: 'Documentation nouvelle application exemple',
   description:
     'Documentation nouvelle application exemple front : nouvelle version VueJS, Buefy et bien plus encore ...',

@@ -54,7 +54,7 @@ yarn lint
 yarn docs:dev
 ```
 
-## Compilation de la documentation pour la production
+### Compilation de la documentation pour la production
 
 ```bash
 yarn docs:build
