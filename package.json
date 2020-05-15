@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --verbose --coverage=true",
     "lint": "vue-cli-service lint",
-    "db": "cd server && npm install && json-server index.js",
+    "db": "cd server && yarn install && json-server --watch index.js",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
