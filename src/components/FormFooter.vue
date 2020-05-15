@@ -9,7 +9,7 @@
         data-testid="bouton-retour"
       >
         <template slot="libelle">
-          Retour
+          <span><b>Retour</b></span>
         </template>
       </base-button>
     </div>

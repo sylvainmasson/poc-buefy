@@ -8,6 +8,7 @@ module.exports = {
       }
     ]
   ],
+  base: '/poc-buefy/',
   title: 'Documentation nouvelle application exemple',
   description:
     'Documentation nouvelle application exemple front : nouvelle version VueJS, Buefy et bien plus encore ...',
@@ -19,7 +20,7 @@ module.exports = {
   themeConfig: {
     logo: '/assets/img/pied-logo.png',
     nav: [
-      { text: 'Guide', link: '/guide/' },
+      { text: 'Guide', link: '/' },
       {
         text: 'GitHub',
         link: 'https://github.com/sylvainmasson/poc-buefy'
@@ -36,7 +37,8 @@ module.exports = {
         title: 'Guide',
         children: [
           ['guide/demarrage', 'Démarrage'],
-          ['guide/fonctionnalite', "Fonctionnalités de l'application"]
+          ['guide/structure', 'Structure des répertoires'],
+          ['guide/fonctionnalite', 'Fonctionnalités']
         ]
       }
     ]
