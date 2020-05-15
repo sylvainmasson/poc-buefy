@@ -10,7 +10,7 @@ Classiquement au département, cette nouvelle application reprend une ergonomie 
 
 De plus, l'application est totalement responsive avec un menu _burger_ en affichage mobile et après un travail sur la feuille de style `Buefy`, elle respecte les critères d'accessibilité.
 
-![Application](/assets/img/app.png)
+<img :src="$withBase('/assets/img/app.png')" alt="Application">
 
 ## Tableau de données
 
@@ -25,11 +25,11 @@ Element important de nos applications, le composant **Table** de `Buefy` qui a �
 
 **Affichage desktop**
 
-![Table](/assets/img/table.png)
+<img :src="$withBase('/assets/img/table.png')" alt="Table">
 
 **Affichage mobile**
 
-![Table mobile](/assets/img/table_mobile.png)
+<img :src="$withBase('/assets/img/table_mobile.png')" alt="Table mobile">
 
 ## Ajout / Modification d'un enregistrement
 
@@ -48,17 +48,17 @@ Dans cet écran, on gère les formats de champs suivants :
 - Un champ Tag Input permettant de gérer une liste d'objets liés
 - Un champ html texte riche
 
-![Formulaire](/assets/img/form.png)
+<img :src="$withBase('/assets/img/form.png')" alt="Formulaire">
 
 Dès que le formulaire est modifié, on affiche à l'utilisateur un message d'avertissement si il souhaite abandonner ou non ses modifications :
 
-![Annulation](/assets/img/annulation.png)
+<img :src="$withBase('/assets/img/annulation.png')" alt="Annulation">
 
 ## Consultation d'un enregistrement
 
 Cet écran permet de consulter les données d'un enregistrement en lecture seule. On affiche les données sur 2 colonnes en gardant le format carte.
 
-![Consultation](/assets/img/consultation.png)
+<img :src="$withBase('/assets/img/consultation.png')" alt="Consultation">
 
 ## Gestion des alertes
 
@@ -79,11 +79,11 @@ this.$store.dispatch('addNotificationSuccessSave')
 
 ### Exemple d'alerte d'enregistrement avec succès
 
-![Alerte succès](/assets/img/succes.png)
+<img :src="$withBase('/assets/img/succes.png')" alt="Alerte succès">
 
 ### Exemple d'alerte d'erreur
 
-![Alerte erreur](/assets/img/erreur.png)
+<img :src="$withBase('/assets/img/erreur.png')" alt="Alerte erreur">
 
 ## Upload et affichage d'image
 
@@ -93,10 +93,10 @@ Les données de l'image sont enregistrés sur Json Server en binaire. Pour l'aff
 Ceci est un exemple d'implémentation. Dans nos applications, il faudra enregistrer l'image sur le serveur et la réafficher à l'aide d'une requête HTTP.
 Les composants développés seront toutefois réutilisable pour ce besoin.
 
-![Avatar](/assets/img/avatar.png)
+<img :src="$withBase('/assets/img/avatar.png')" alt="Avatar">
 
 ## Gestion de carte
 
 A partir de coordonnées géographiques latitude longitude (x,y), on affiche un marqueur sur une carte `OpenStreetMap` grâce à `Leaflet`.
 
-![Carte](/assets/img/carte_app.png)
+<img :src="$withBase('/assets/img/carte_app.png')" alt="Carte">
