@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit --verbose --coverage=true",
     "lint": "vue-cli-service lint",
     "db": "cd server && yarn install && json-server --watch index.js",
+    "start": "cd server && yarn install && json-server --watch index.js && cd .. & vue-cli-service serve",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
@@ -59,7 +60,6 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
     "overrides": [
       {
         "files": [

@@ -28,6 +28,12 @@ yarn install
 json-server --watch index.js
 ```
 
+### Commande regroupant les 2 précédentes pour démarrer la partie cliente et serveur
+
+```bash
+yarn start
+```
+
 ## Autres commandes
 
 ### Compilation pour la production

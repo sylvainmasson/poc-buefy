@@ -38,7 +38,8 @@ module.exports = {
         children: [
           ['guide/demarrage', 'Démarrage'],
           ['guide/structure', 'Structure des répertoires'],
-          ['guide/fonctionnalite', 'Fonctionnalités']
+          ['guide/fonctionnalite', 'Fonctionnalités'],
+          ['guide/configuration', 'Configuration']
         ]
       }
     ]
