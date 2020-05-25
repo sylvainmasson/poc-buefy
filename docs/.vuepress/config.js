@@ -1,5 +1,6 @@
 module.exports = {
   plugins: [
+    'vuepress-plugin-mermaidjs',
     '@vuepress/back-to-top',
     [
       '@vuepress/medium-zoom',
@@ -39,7 +40,8 @@ module.exports = {
           ['guide/demarrage', 'Démarrage'],
           ['guide/structure', 'Structure des répertoires'],
           ['guide/fonctionnalite', 'Fonctionnalités'],
-          ['guide/configuration', 'Configuration']
+          ['guide/configuration', 'Configuration'],
+          ['guide/donnees', 'Données et API']
         ]
       }
     ]

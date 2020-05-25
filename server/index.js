@@ -3,7 +3,7 @@ var faker = require('faker/locale/fr')
 // index.js
 module.exports = () => {
   const data = { clients: [], avatars: [], users: [] }
-  // Create 2000 users
+  // Create 500 users
   for (var id = 0; id < 500; id++) {
     data.clients.push({
       id: id,
@@ -12,6 +12,7 @@ module.exports = () => {
       nom: faker.name.lastName(),
       prenom: faker.name.firstName(),
       email: faker.internet.email(),
+      // Date en ISO (YYYY-MM-DD) précédant le 1 janvier 1998 de 30 ans ou moins
       birthdate: faker.date
         .past(30, new Date('1998-01-01'))
         .toISOString()
