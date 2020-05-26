@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main>
-      <Navbar></Navbar>
+      <Navbar titre1="Application" titre2="Exemple"></Navbar>
       <div class="container">
         <section class="hero">
           <div class="hero-body">

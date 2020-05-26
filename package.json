@@ -46,6 +46,7 @@
     "vue-cli-plugin-buefy": "~0.3.7",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.5.0",
+    "vuepress-plugin-element-tabs": "^0.2.8",
     "vuepress-plugin-mermaidjs": "^1.5.1"
   },
   "eslintConfig": {
