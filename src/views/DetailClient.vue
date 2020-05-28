@@ -15,10 +15,8 @@
               value="avatar"
               v-if="image || client.avatarUrl"
             >
-              <template v-slot:default>
-                <img v-if="image" :src="image" alt="avatar" />
-                <img v-else :src="client.avatarUrl" alt="avatar" />
-              </template>
+              <img v-if="image" :src="image" alt="avatar" />
+              <img v-else :src="client.avatarUrl" alt="avatar" />
             </label-value>
             <label-value label="Nom" :value="client.nom" />
             <label-value label="Prénom" :value="client.prenom" />
@@ -45,12 +43,10 @@
           <div class="column">
             <label-value icon="city" label="Adresse" :value="labelAdresse" />
             <label-value label="" value="adresse">
-              <template v-slot:default>
-                <map-marker
-                  :coordonnees="client.adresse.coordonnees"
-                  height="200px"
-                ></map-marker>
-              </template>
+              <map-marker
+                :coordonnees="client.adresse.coordonnees"
+                height="200px"
+              ></map-marker>
             </label-value>
             <label-value
               label="Entreprise"
@@ -61,24 +57,20 @@
               :value="client.contacts"
               v-if="client.contacts.length > 0"
             >
-              <template v-slot:default>
-                <span>
-                  <ul>
-                    <li v-for="contact in client.contacts" :key="contact.id">
-                      {{ contact.nomComplet }}
-                    </li>
-                  </ul>
-                </span>
-              </template>
+              <span>
+                <ul>
+                  <li v-for="contact in client.contacts" :key="contact.id">
+                    {{ contact.nomComplet }}
+                  </li>
+                </ul>
+              </span>
             </label-value>
             <label-value
               icon="comment"
               label="Commentaire"
               :value="client.commentaire"
             >
-              <template v-slot:default>
-                <div id="commentaire" v-html="client.commentaire"></div>
-              </template>
+              <div id="commentaire" v-html="client.commentaire"></div>
             </label-value>
           </div>
         </div>

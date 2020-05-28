@@ -11,12 +11,12 @@
         <form id="signUpForm" @submit.prevent="submit">
           <section>
             <field-avatar
-              :imageData="imageData"
-              :avatarUrl="client.avatarUlr"
+              :image-data="imageData"
+              :avatar-url="client.avatarUrl"
             />
             <field-upload-image
-              :libelleBouton="boutonAvatar"
-              :maxSize="800000"
+              :libelle-bouton="boutonAvatar"
+              :max-size="800000"
               @upload="upload"
             />
             <b-field label="Civilité *" label-for="civilite" horizontal>
@@ -287,11 +287,11 @@ export default {
     },
     /**
      * Gestion de la mise à jour de l'image
-     * @param {Object} event fichier image et libellé du bouton à mettre à jour
+     * @param {Object} event fichier image
      */
     upload(event) {
       this.imageData = event.imageData
-      this.boutonAvatar = event.libelleBouton
+      this.boutonAvatar = "Mettre à jour l'avatar"
     },
     /**
      * Enregistrement du client

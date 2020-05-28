@@ -31,10 +31,6 @@ export default {
     value: {
       String,
       required: false
-    },
-    show: {
-      Boolean,
-      default: true
     }
   }
 }

@@ -419,12 +419,241 @@ _Champ téléphone avec expression régulière de validation_ :
 
 ## Champ texte riche
 
+Le composant s'appelle `FieldRichText` et permet de gérer le libellé et un champ de saisie de type texte riche en utilisant [Vue2Editor](https://www.vue2editor.com/).
+De la même manière que pour le champ input, le libellé du champ s'affiche de manière horizontale et ajoute une astérisque si le champ est obligatoire.
+
+::: tip Note
+Pour que le caractère obligatoire, il faut impérativement passer le paramètre `required=true` et pas seulement `required`. La valeur ne pouvant alors être interprétée par le composant lui même.
+:::
+
+Ce composant se comporte en passe plat et permet de définir tous les attributs possibles sur un `b-input` et `vue-editor`.
+
+**Démo**
+
+<img :src="$withBase('/assets/img/richtext.gif')" alt="Champ de texte riche">
+
+**Propriétés**
+
+| Nom   | Description          | Type                 | Obligatoire | Valeur par Défaut |
+| ----- | -------------------- | -------------------- | ----------- | ----------------- |
+| id    | Identifiant du champ | Chaîne de caractères | Oui         |                   |
+| label | Libellé du champ     | Chaîne de caractères | Oui         |                   |
+
 ## Champ adresse
 
-## Téléchargement image
+Le composant `FieldAdresse` permet d'effectuer une recherche via autocompletion sur la Base d'Adresse Nationale, de renseigner la valeur sélectionnée dans un objet `Adresse` et d'afficher cette adresse sur une carte grâce à ses coordonnées latitude longitude.
 
-## Affichage image
+Elle utilise le composant `MapMarker` décrit ci-dessous.
+
+Pour rappel, voici la structure d'une adresse :
+
+```mermaid
+classDiagram
+class Adresse {
+    - String localisationInterne
+    - String construction
+    - String numero
+    - String libelleVoie
+    - String lieuDit
+    - String codePostal
+    - String codeInsee
+    - String commune
+    - [x,y] coordonnees
+}
+```
+
+::: tip Note
+Le composant se charge de transformer les données provenant de la **BAN** dans le format de l'adresse décrit ci-dessus.
+:::
+
+Le champ se compose comme les autres composants champ d'un libellé et d'une partie saisie obligatoire ou non.
+
+**Demo**
+
+<img :src="$withBase('/assets/img/adresse.gif')" alt="Champ adresse avec carte">
+
+**Propriétés**
+
+| Nom      | Description                  | Type    | Obligatoire | Valeur par Défaut |
+| -------- | ---------------------------- | ------- | ----------- | ----------------- |
+| adresse  | Objet adresse                | Objet   | Oui         |                   |
+| required | Obligatoire ou non           | Booléen | Oui         |                   |
+| showMap  | Affichage de la carte ou non | Booléen | Oui         |                   |
 
 ## Carte avec marqueur
 
+Le composant `MapMarker` permet d'afficher un marqueur grâce à ses coordonnées latitude longitude sur une carte.
+
+Pour cela, on utilise le composant [Vue LeafLet](https://vue2-leaflet.netlify.app) qui permet de rendre réactif en **VueJS** la bibliothèque JavaScript libre de cartographie [Leaflet](https://leafletjs.com/).
+
+Ensuite concernant la carte elle-même, on utilise **OpenStreetMap**.
+
+**Propriétés**
+
+| Nom         | Description                               | Type                 | Obligatoire | Exemple |
+| ----------- | ----------------------------------------- | -------------------- | ----------- | ------- |
+| coordonnees | Tableau de coordonnées latitude longitude | Objet                | Oui         |         |
+| height      | Hauteur d'affichage de la carte en pixels | Chaîne de caractères | Oui         | 300px   |
+
+## Téléchargement image
+
+Le composant `FieldUploadImage` permet comme son nom l'indique de télécharger une image.
+
+Il prend en charge les images de type **jpeg** et **png**. On définit aussi une taille maximum d'upload.
+
+Une fois que l'image est téléchargée, un évènement est déclenché permettant de récupérer celle-ci.
+
+**Exemple d'utilisation**
+
+```html
+<field-upload-image
+  :libelleBouton="boutonAvatar"
+  :maxSize="800000"
+  @upload="upload"
+/>
+```
+
+```javascript
+/**
+ * Gestion de la mise à jour de l'image
+ * @param {Object} event fichier image
+ */
+upload(event) {
+  this.imageData = event.imageData
+  this.boutonAvatar = "Mettre à jour l'avatar"
+}
+```
+
+**Démo**
+
+<img :src="$withBase('/assets/img/avatar.gif')" alt="Avatar">
+
+:::: tabs
+
+::: tab Propriétés
+
+| Nom           | Description                                    | Type                 | Obligatoire | Valeur par Défaut |
+| ------------- | ---------------------------------------------- | -------------------- | ----------- | ----------------- |
+| libelleBouton | Libellé du bouton                              | Chaîne de caractères | Oui         |                   |
+| maxSize       | Taille maximum de l'image téléchargée en octet | Nombre               | Oui         |                   |
+
+:::
+
+::: tab Évènements
+
+| Nom    | Description                                  | Paramètres                              |
+| ------ | -------------------------------------------- | --------------------------------------- |
+| upload | Déclenché après le téléchargement de l'image | `imageData` données binaires de l'image |
+
+:::
+
+::::
+
+## Affichage image
+
+Le composant `FieldAvatar` permet d'afficher l'image.
+
+Il permet soit :
+
+- De ne rien afficher si l'url de l'avatar ou les données de l'image de l'avatar sont vides.
+- D'afficher l'avatar à partir des données de l'image.
+- D'afficher l'avatar à partir de son url si celle-ci est renseignée et si les données de l'image sont vides.
+
+**Propriétés**
+
+| Nom       | Description        | Type                 | Obligatoire | Valeur par Défaut |
+| --------- | ------------------ | -------------------- | ----------- | ----------------- |
+| imageData | Données de l'image | Chaîne de caractères | Non         |                   |
+| avatarUrl | Url de l'avatar    | Chaîne de caractères | Non         |                   |
+
 ## Libellé valeur
+
+Le composant `LabelValue` permet d'afficher un libellé et une valeur de manière horizontale.
+
+Si la propriété `icon` est défini, celui-ci remplace le libellé.
+
+L'utilisation d'un slot par défaut permet de remplacer la valeur `value` par un affichage spécifique.
+
+Si la valeur est null, tout le champ est caché.
+
+**Exemples d'utilisation**
+
+_Affichage de l'avatar_
+
+```html
+<label-value label="Avatar" value="avatar" v-if="image || client.avatarUrl">
+  <img v-if="image" :src="image" alt="avatar" />
+  <img v-else :src="client.avatarUrl" alt="avatar" />
+</label-value>
+```
+
+_Champ classique nom_
+
+```html
+<label-value label="Nom" :value="client.nom" />
+```
+
+_Affichage de l'adresses électronique avec icône et lien mailto sur l'email_
+
+```html
+<label-value icon="email" label="adresse électronique" :value="client.email">
+  <a v-bind:href="'mailto:' + client.email">
+    {{ client.email }}
+  </a>
+</label-value>
+```
+
+_Affichage de la carte sans libellé et sans icône_
+
+```html
+<label-value label="" value="adresse">
+  <map-marker
+    :coordonnees="client.adresse.coordonnees"
+    height="200px"
+  ></map-marker>
+</label-value>
+```
+
+_Affichage de la liste des contacts_
+
+```html
+<label-value
+  label="Contact"
+  :value="client.contacts"
+  v-if="client.contacts.length > 0"
+>
+  <span>
+    <ul>
+      <li v-for="contact in client.contacts" :key="contact.id">
+        {{ contact.nomComplet }}
+      </li>
+    </ul>
+  </span>
+</label-value>
+```
+
+**Démo**
+
+<img :src="$withBase('/assets/img/label_value.png')" alt="Libellé valeur">
+
+:::: tabs
+
+::: tab Propriétés
+
+| Nom   | Description                                              | Type                 | Obligatoire | Valeur par Défaut |
+| ----- | -------------------------------------------------------- | -------------------- | ----------- | ----------------- |
+| label | Libellé du champ                                         | Chaîne de caractères | Oui         |                   |
+| icon  | Icône **MDI** à afficher, si icône, le libellé est caché | Chaîne de caractères | Non         |                   |
+| value | Valeur du champ, si vide le champ est caché              | Chaîne de caractères | Non         |                   |
+
+:::
+
+::: tab Slots
+
+| Nom     | Description                                         |
+| ------- | --------------------------------------------------- |
+| default | Remplacement du libellé par un affichage spécifique |
+
+:::
+
+::::
