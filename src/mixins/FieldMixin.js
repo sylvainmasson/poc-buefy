@@ -8,8 +8,7 @@ export const FieldMixin = {
     label: {
       type: String,
       default: ''
-    },
-    value: [String, Number]
+    }
   },
   methods: {
     updateValue(event) {

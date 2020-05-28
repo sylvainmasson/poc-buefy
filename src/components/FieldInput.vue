@@ -1,6 +1,6 @@
 <template>
   <b-field :label="getLabel" :label-for="id" horizontal data-testid="label">
-    <b-input :id="id" :value="value" @input="updateValue" v-bind="$attrs" />
+    <b-input :id="id" @input="updateValue" v-bind="$attrs" />
   </b-field>
 </template>
 

@@ -2,7 +2,6 @@
   <b-field :label="getLabel" label-for="id" horizontal data-testid="label">
     <vue-editor
       id="id"
-      :value="value"
       @input="updateValue"
       :editorToolbar="customToolbar"
       v-bind="$attrs"
