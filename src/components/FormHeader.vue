@@ -14,19 +14,19 @@ export default {
   name: 'FormHeader',
   props: {
     modification: {
-      Boolean,
+      type: Boolean,
       required: true
     },
     libelleCreation: {
-      String,
+      type: String,
       required: true
     },
     libelleModification: {
-      String,
+      type: String,
       required: true
     },
     libelleEnTete: {
-      String,
+      type: String,
       required: true
     }
   }

@@ -3,7 +3,7 @@
     <vue-editor
       id="id"
       @input="updateValue"
-      :editorToolbar="customToolbar"
+      :editor-toolbar="customToolbar"
       v-bind="$attrs"
     ></vue-editor>
   </b-field>

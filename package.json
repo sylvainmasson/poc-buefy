@@ -55,7 +55,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "eslint:recommended",
       "@vue/prettier"
     ],
@@ -72,7 +72,10 @@
           "jest": true
         }
       }
-    ]
+    ],
+    "rules": {
+      "vue/require-default-prop": "off"
+    }
   },
   "browserslist": [
     "> 1%",

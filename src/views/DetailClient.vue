@@ -3,9 +3,9 @@
     <div class="card">
       <form-header
         :modification="true"
-        libelleCreation=""
-        libelleModification="Consultation du client"
-        :libelleEnTete="libelleEnTete"
+        libelle-creation=""
+        libelle-modification="Consultation du client"
+        :libelle-en-tete="libelleEnTete"
       ></form-header>
       <div class="card-content">
         <div class="columns">
@@ -30,7 +30,7 @@
               label="adresse électronique"
               :value="client.email"
             >
-              <a v-bind:href="'mailto:' + client.email">
+              <a :href="'mailto:' + client.email">
                 {{ client.email }}
               </a>
             </label-value>
@@ -74,7 +74,7 @@
             </label-value>
           </div>
         </div>
-        <form-footer :routeRetour="routeRetour" :readOnly="true" />
+        <form-footer :route-retour="routeRetour" :read-only="true" />
       </div>
     </div>
   </div>
@@ -104,7 +104,7 @@ export default {
       }
     }
   },
-  props: ['id'],
+  props: { id: { type: String } },
   methods: {
     getAvatar(id) {
       AvatarService.getAvatar(id)

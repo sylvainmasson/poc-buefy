@@ -21,15 +21,15 @@ export default {
   name: 'LabelValue',
   props: {
     label: {
-      String,
+      type: String,
       required: true
     },
     icon: {
-      String,
+      type: String,
       requried: false
     },
     value: {
-      String,
+      type: String,
       required: false
     }
   }

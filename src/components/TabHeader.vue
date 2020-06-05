@@ -11,7 +11,7 @@
         type="is-success"
         icon-left="plus"
         v-if="isAdd"
-        v-on:click="$emit('click-add')"
+        @click="$emit('click-add')"
         data-testid="button-add"
       />
       <base-button
@@ -20,7 +20,7 @@
         title="Exporter en CSV"
         libelle="Exporter"
         v-if="isExportable"
-        v-on:click="$emit('click-export')"
+        @click="$emit('click-export')"
         data-testid="button-export"
       />
       <slot name="after" />
@@ -35,7 +35,7 @@ export default {
   name: 'TabHeader',
   props: {
     title: {
-      String,
+      type: String,
       required: true
     },
     isAdd: Boolean,

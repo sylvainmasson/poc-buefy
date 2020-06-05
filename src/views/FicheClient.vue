@@ -3,9 +3,9 @@
     <div class="card">
       <form-header
         :modification="modification"
-        :libelleCreation="libelleCreation"
-        :libelleModification="libelleModification"
-        :libelleEnTete="libelleEnTete"
+        :libelle-creation="libelleCreation"
+        :libelle-modification="libelleModification"
+        :libelle-en-tete="libelleEnTete"
       ></form-header>
       <div class="card-content">
         <form id="signUpForm" @submit.prevent="submit">
@@ -82,7 +82,7 @@
             <field-adresse
               :required="true"
               :adresse="client.adresse"
-              :showMap="true"
+              :show-map="true"
               @select="client.adresse = $event"
             ></field-adresse>
             <b-field label="Entreprise *" label-for="entreprise" horizontal>
@@ -128,7 +128,7 @@
               label="Commentaire"
               v-model="client.commentaire"
             />
-            <form-footer :routeRetour="routeRetour" :readOnly="false" />
+            <form-footer :route-retour="routeRetour" :read-only="false" />
           </section>
         </form>
       </div>
@@ -170,7 +170,7 @@ export default {
       }
     }
   },
-  props: ['id'],
+  props: { id: { type: String } },
   methods: {
     getClient(id) {
       ClientService.getClient(id)

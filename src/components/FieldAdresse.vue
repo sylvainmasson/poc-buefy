@@ -34,15 +34,15 @@ export default {
   name: 'FieldAdresse',
   props: {
     adresse: {
-      Object,
+      type: Object,
       required: true
     },
     required: {
-      Boolean,
+      type: Boolean,
       required: true
     },
     showMap: {
-      Boolean,
+      type: Boolean,
       required: true
     }
   },

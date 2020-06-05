@@ -61,11 +61,11 @@ export default {
   name: 'FormFooter',
   props: {
     readOnly: {
-      Boolean,
+      type: Boolean,
       required: true
     },
     routeRetour: {
-      Object,
+      type: Object,
       required: true
     }
   },
