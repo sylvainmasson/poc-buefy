@@ -92,7 +92,7 @@ C'est juste un composant squelette qui permet de passer les attributs, les méth
 <b-button v-on="$listeners" v-bind="$attrs">
 ```
 
-Il possède aussi un slot qui permet de redéfinir le libellé.
+Il possède aussi un slot par défaut qui permet de redéfinir le libellé.
 
 **Exemple d'utilisation**
 
@@ -107,7 +107,7 @@ Il possède aussi un slot qui permet de redéfinir le libellé.
 />
 ```
 
-Avec utilisation du slot `libelle`
+Avec utilisation du slot par défaut
 
 ```html
 <base-button
@@ -116,7 +116,7 @@ Avec utilisation du slot `libelle`
   @click.native="connexion"
   v-if="!isAuthenticated"
 >
-  <template slot="libelle">
+  <template>
     <strong>Connexion</strong>
   </template>
 </base-button>
@@ -277,6 +277,10 @@ Si le tableau n'est pas paginée, la configuration de la pagination s'affiche da
   <pagination :id="id" />
 </template>
 ```
+
+::: tip Note
+La sauvegarde de la pagination dans le store se fait à chaque changement d'état de la pagination que ce soit le passage de la pagination ou non, le changement de type de pagination ou le changement du nombre d'éléments affichés par page.
+:::
 
 **Demo**
 
