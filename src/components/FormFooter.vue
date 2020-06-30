@@ -8,7 +8,7 @@
         @click.native="retour"
         data-testid="bouton-retour"
       >
-        <template slot="libelle">
+        <template>
           <span><b>Retour</b></span>
         </template>
       </base-button>
@@ -39,7 +39,7 @@
           @click.native="retour"
           data-testid="bouton-annuler"
         >
-          <template slot="libelle">
+          <template>
             Annuler
           </template>
         </base-button>
