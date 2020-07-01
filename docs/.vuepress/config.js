@@ -44,7 +44,8 @@ module.exports = {
           ['guide/configuration', 'Configuration'],
           ['guide/donnees', 'Données et API'],
           ['guide/composant', 'Composants'],
-          ['guide/store', 'Store VueX']
+          ['guide/store', 'Store VueX'],
+          ['guide/formulaire', 'Formulaire']
         ]
       }
     ]
