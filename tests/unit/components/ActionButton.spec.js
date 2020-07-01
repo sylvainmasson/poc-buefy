@@ -17,6 +17,18 @@ describe('ActionButton.vue, lecture', () => {
     expect(wrapper.find('[data-testid="button-read"]').exists()).toBe(true)
   })
 
+  it('Should emmit click-read, if button read is clicked', () => {
+    const wrapper = shallowMount(ActionButton, {
+      propsData: {
+        isReadable: true
+      },
+      localVue
+    })
+    wrapper.find('[data-testid="button-read"]').trigger('click')
+    const clickRead = wrapper.emitted('click-read')
+    expect(clickRead).toHaveLength(1)
+  })
+
   it('Should not render button read, if isReadable false', () => {
     const wrapper = shallowMount(ActionButton, { localVue })
     expect(wrapper.find('[data-testid="button-read"]').exists()).toBe(false)
@@ -32,6 +44,18 @@ describe('ActionButton.vue, modification', () => {
       localVue
     })
     expect(wrapper.find('[data-testid="button-modify"]').isVisible()).toBe(true)
+  })
+
+  it('Should emmit click-edit, if button edit is clicked', () => {
+    const wrapper = shallowMount(ActionButton, {
+      propsData: {
+        isEditable: true
+      },
+      localVue
+    })
+    wrapper.find('[data-testid="button-modify"]').trigger('click')
+    const clickRead = wrapper.emitted('click-edit')
+    expect(clickRead).toHaveLength(1)
   })
 
   it('Should not render button modify, if isEditable false', () => {

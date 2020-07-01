@@ -95,7 +95,7 @@ describe('Connexion.vue, utilisateur authentifié', () => {
     )
   })
 
-  it('Shoudl disconnect and go to home, if disconnection button triggered', () => {
+  it('Should disconnect and go to home, if disconnection button triggered', () => {
     const wrapper = shallowMount(Connexion, {
       store,
       localVue,

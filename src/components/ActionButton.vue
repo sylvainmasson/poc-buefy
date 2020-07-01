@@ -6,7 +6,7 @@
       icon-right="eye"
       title="Voir"
       v-if="isReadable"
-      @click="$emit('click-read')"
+      @click.native="$emit('click-read')"
       data-testid="button-read"
     />
     <base-button
@@ -14,7 +14,7 @@
       icon-right="pencil"
       title="Modifier"
       v-if="isEditable"
-      @click="$emit('click-edit')"
+      @click.native="$emit('click-edit')"
       data-testid="button-modify"
     />
     <base-button
@@ -22,7 +22,7 @@
       icon-right="delete"
       title="Supprimer"
       v-if="isDeletable"
-      @click="remove"
+      @click.native="remove"
       data-testid="button-delete"
     />
     <slot name="after" />
