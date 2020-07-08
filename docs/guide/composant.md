@@ -103,7 +103,7 @@ Il possède aussi un slot par défaut qui permet de redéfinir le libellé.
   type="is-success"
   icon-left="plus"
   v-if="isAdd"
-  v-on:click="add"
+  @click="add"
 />
 ```
 
