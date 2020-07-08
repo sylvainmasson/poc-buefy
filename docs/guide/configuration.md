@@ -98,7 +98,11 @@ Il reste une dernière étape pour finaliser la configuration de **Prettier** en
   "prettier.semi": false,
   "prettier.singleQuote": false,
   "prettier.tabWidth": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 ```
