@@ -1,6 +1,8 @@
 module.exports = {
   plugins: [
+    'vuepress-plugin-mermaidjs',
     '@vuepress/back-to-top',
+    'vuepress-plugin-element-tabs',
     [
       '@vuepress/medium-zoom',
       {
@@ -38,7 +40,13 @@ module.exports = {
         children: [
           ['guide/demarrage', 'Démarrage'],
           ['guide/structure', 'Structure des répertoires'],
-          ['guide/fonctionnalite', 'Fonctionnalités']
+          ['guide/fonctionnalite', 'Fonctionnalités'],
+          ['guide/configuration', 'Configuration'],
+          ['guide/donnees', 'Données et API'],
+          ['guide/composant', 'Composants'],
+          ['guide/store', 'Store VueX'],
+          ['guide/formulaire', 'Formulaire'],
+          ['guide/test', 'Tests unitaires']
         ]
       }
     ]

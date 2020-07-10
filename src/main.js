@@ -23,8 +23,6 @@ import FieldRichText from '@/components/FieldRichText'
 import FieldUploadImage from '@/components/FieldUploadImage'
 import FieldAvatar from '@/components/FieldAvatar'
 
-Vue.use(Buefy)
-
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)

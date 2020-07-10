@@ -1,6 +1,6 @@
 <template>
   <section v-if="coordonnees && coordonnees.length > 0">
-    <l-map v-bind:style="'height:' + height" :zoom="zoom" :center="coordonnees">
+    <l-map :style="'height:' + height" :zoom="zoom" :center="coordonnees">
       <l-tile-layer :url="url"></l-tile-layer>
       <l-marker :lat-lng="coordonnees"></l-marker>
     </l-map>
@@ -26,11 +26,11 @@ export default {
   name: 'MapMarker',
   props: {
     coordonnees: {
-      Array,
+      type: Array,
       required: true
     },
     height: {
-      String,
+      type: String,
       required: true
     }
   },

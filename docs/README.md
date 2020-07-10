@@ -14,6 +14,7 @@ L'alimentation aléatoire des données se fait avec faker.js pour avoir un jeu d
 | ------------------------------------------------ | ---------- | ---------- |
 | Langage                                          | Javascript | ES6        |
 | Framework applicatif front                       | VueJS      | 2.6        |
+| Gestionnaire d'état                              | VueX       | 3.1        |
 | Framework CSS                                    | Buefy      | 0.8        |
 | Framework de test Front                          | Jest       | 24.9       |
 | Module Bundler et gestion de configuration Front | Webpack    | 4.4        |

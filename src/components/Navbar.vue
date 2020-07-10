@@ -6,8 +6,8 @@
   >
     <template slot="brand">
       <b-navbar-item @click="$router.push('/')">
-        <span class="titrebleu">Application</span>
-        <span class="titrevert">exemple</span>
+        <span class="titrebleu">{{ titre1 }}</span>
+        <span class="titrevert">{{ titre2 }}</span>
       </b-navbar-item>
     </template>
     <template slot="start" v-if="isAuthenticated">
@@ -35,6 +35,16 @@ import Connexion from '@/components/Connexion'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    titre1: {
+      type: String,
+      required: true
+    },
+    titre2: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       isActive: false

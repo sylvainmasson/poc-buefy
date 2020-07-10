@@ -1,7 +1,7 @@
 <template>
   <p class="control">
     <b-button v-on="$listeners" v-bind="$attrs">
-      <slot name="libelle">
+      <slot>
         <span class="is-hidden-mobile" data-testid="libelle" v-if="libelle">
           <b>{{ libelle }}</b>
         </span>

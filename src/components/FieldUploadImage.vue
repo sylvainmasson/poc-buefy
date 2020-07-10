@@ -33,8 +33,7 @@ export default {
         var reader = new FileReader()
         reader.onload = e => {
           this.$emit('upload', {
-            imageData: e.target.result,
-            libelleBouton: "Mettre à jour l'avatar"
+            imageData: e.target.result
           })
         }
         reader.readAsBinaryString(o)

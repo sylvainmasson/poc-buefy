@@ -3,20 +3,20 @@
     <div class="card">
       <form-header
         :modification="modification"
-        :libelleCreation="libelleCreation"
-        :libelleModification="libelleModification"
-        :libelleEnTete="libelleEnTete"
+        :libelle-creation="libelleCreation"
+        :libelle-modification="libelleModification"
+        :libelle-en-tete="libelleEnTete"
       ></form-header>
       <div class="card-content">
         <form id="signUpForm" @submit.prevent="submit">
           <section>
             <field-avatar
-              :imageData="imageData"
-              :avatarUrl="client.avatarUlr"
+              :image-data="imageData"
+              :avatar-url="client.avatarUrl"
             />
             <field-upload-image
-              :libelleBouton="boutonAvatar"
-              :maxSize="800000"
+              :libelle-bouton="boutonAvatar"
+              :max-size="800000"
               @upload="upload"
             />
             <b-field label="Civilité *" label-for="civilite" horizontal>
@@ -82,7 +82,7 @@
             <field-adresse
               :required="true"
               :adresse="client.adresse"
-              :showMap="true"
+              :show-map="true"
               @select="client.adresse = $event"
             ></field-adresse>
             <b-field label="Entreprise *" label-for="entreprise" horizontal>
@@ -128,7 +128,7 @@
               label="Commentaire"
               v-model="client.commentaire"
             />
-            <form-footer :routeRetour="routeRetour" :readOnly="false" />
+            <form-footer :route-retour="routeRetour" :read-only="false" />
           </section>
         </form>
       </div>
@@ -170,7 +170,7 @@ export default {
       }
     }
   },
-  props: ['id'],
+  props: { id: { type: String } },
   methods: {
     getClient(id) {
       ClientService.getClient(id)
@@ -287,11 +287,11 @@ export default {
     },
     /**
      * Gestion de la mise à jour de l'image
-     * @param {Object} event fichier image et libellé du bouton à mettre à jour
+     * @param {Object} event fichier image
      */
     upload(event) {
       this.imageData = event.imageData
-      this.boutonAvatar = event.libelleBouton
+      this.boutonAvatar = "Mettre à jour l'avatar"
     },
     /**
      * Enregistrement du client

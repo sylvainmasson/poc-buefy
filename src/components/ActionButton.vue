@@ -6,7 +6,7 @@
       icon-right="eye"
       title="Voir"
       v-if="isReadable"
-      v-on:click="$emit('click-read')"
+      @click.native="$emit('click-read')"
       data-testid="button-read"
     />
     <base-button
@@ -14,7 +14,7 @@
       icon-right="pencil"
       title="Modifier"
       v-if="isEditable"
-      v-on:click="$emit('click-edit')"
+      @click.native="$emit('click-edit')"
       data-testid="button-modify"
     />
     <base-button
@@ -22,7 +22,7 @@
       icon-right="delete"
       title="Supprimer"
       v-if="isDeletable"
-      v-on:click="remove"
+      @click.native="remove"
       data-testid="button-delete"
     />
     <slot name="after" />
@@ -39,7 +39,7 @@ export default {
     isEditable: Boolean,
     isDeletable: Boolean,
     libelle: {
-      String,
+      type: String,
       required: false
     }
   },

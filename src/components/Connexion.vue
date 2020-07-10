@@ -19,7 +19,7 @@
         v-if="!isAuthenticated"
         data-testid="bouton-connexion"
       >
-        <template slot="libelle">
+        <template>
           <strong>Connexion</strong>
         </template>
       </base-button>

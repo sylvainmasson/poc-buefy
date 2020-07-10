@@ -88,10 +88,10 @@ this.$store.dispatch('addNotificationSuccessSave')
 ## Upload et affichage d'image
 
 L'application permet de gérer les avatars en proposant l'upload et l'affichage d'image.
-Les données de l'image sont enregistrés sur Json Server en binaire. Pour l'affichage, on décode en base 64 l'image.
+Les données de l'image sont enregistrées sur Json Server en binaire. Pour l'affichage, on décode en base 64 l'image.
 
 Ceci est un exemple d'implémentation. Dans nos applications, il faudra enregistrer l'image sur le serveur et la réafficher à l'aide d'une requête HTTP.
-Les composants développés seront toutefois réutilisable pour ce besoin.
+Les composants développés seront toutefois réutilisables pour ce besoin.
 
 <img :src="$withBase('/assets/img/avatar.png')" alt="Avatar">
 

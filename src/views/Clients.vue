@@ -1,11 +1,11 @@
 <template>
   <div class="card">
     <tab-header
-      isAdd
-      isExportable
+      is-add
+      is-exportable
       title="Liste des clients"
-      v-on:click-add="goToAdd"
-      v-on:click-export="exporter"
+      @click-add="goToAdd"
+      @click-export="exporter"
     />
     <div class="card-content">
       <b-table
@@ -67,12 +67,12 @@
           </b-table-column>
           <b-table-column>
             <action-button
-              isReadable
-              isEditable
-              isDeletable
-              v-on:click-read="goToRead(props.row.id)"
-              v-on:click-edit="goToEdit(props.row.id)"
-              v-on:click-delete="remove(props.row)"
+              is-readable
+              is-editable
+              is-deletable
+              @click-read="goToRead(props.row.id)"
+              @click-edit="goToEdit(props.row.id)"
+              @click-delete="remove(props.row)"
               :libelle="getNomComplet(props.row)"
             />
           </b-table-column>
@@ -87,7 +87,7 @@
                 <img :src="avatar" />
               </p>
               <p v-else-if="props.row.avatarUrl" class="image is-64x64">
-                <img v-bind:src="props.row.avatarUrl" />
+                <img :src="props.row.avatarUrl" />
               </p>
               <b-icon v-else icon="account" size="is-large"></b-icon>
             </figure>
@@ -95,7 +95,7 @@
               <div class="content">
                 <p>
                   <b-icon icon="email" size="is-small"></b-icon>
-                  <a v-bind:href="'mailto:' + props.row.email">{{
+                  <a :href="'mailto:' + props.row.email">{{
                     props.row.email
                   }}</a>
                 </p>

@@ -8,6 +8,7 @@
     "test:unit": "vue-cli-service test:unit --verbose --coverage=true",
     "lint": "vue-cli-service lint",
     "db": "cd server && yarn install && json-server --watch index.js",
+    "start": "cd server && yarn install && json-server --watch index.js && cd .. & vue-cli-service serve",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
@@ -44,7 +45,9 @@
     "sass-loader": "^7.0.1",
     "vue-cli-plugin-buefy": "~0.3.7",
     "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.5.0"
+    "vuepress": "^1.5.0",
+    "vuepress-plugin-element-tabs": "^0.2.8",
+    "vuepress-plugin-mermaidjs": "^1.5.1"
   },
   "eslintConfig": {
     "root": true,
@@ -52,14 +55,13 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "eslint:recommended",
       "@vue/prettier"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
     "overrides": [
       {
         "files": [
@@ -70,7 +72,10 @@
           "jest": true
         }
       }
-    ]
+    ],
+    "rules": {
+      "vue/require-default-prop": "off"
+    }
   },
   "browserslist": [
     "> 1%",
