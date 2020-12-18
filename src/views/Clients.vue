@@ -3,9 +3,11 @@
     <tab-header
       is-add
       is-exportable
+      is-empty-filter
       title="Liste des clients"
       @click-add="goToAdd"
       @click-export="exporter"
+      @click-empty-filter="emptyFilter"
     />
     <div class="card-content">
       <b-table
@@ -176,6 +178,10 @@ export default {
             this.isPaginated = true
           }
           this.isLoading = false
+          // Récupération des filtres
+          this.$refs[
+            'clients'
+          ]._data.filters = this.$store.getters.getFilterById(this.id)
         })
         .catch(e => {
           this.$store.dispatch('addNotificationError', e.response.data)
@@ -186,23 +192,22 @@ export default {
       return `${client.prenom} ${client.nom}`
     },
     goToRead(id) {
+      this.saveFilters(this.$refs['clients'].filters)
       if (id) {
         this.$router.push({ name: 'ClientDetail', params: { id } })
       }
     },
     goToEdit(id) {
+      this.saveFilters(this.$refs['clients'].filters)
       if (id) {
         this.$router.push({ name: 'ClientModification', params: { id } })
       }
     },
     remove(client) {
+      this.saveFilters(this.$refs['clients'].filters)
       if (client) {
         ClientService.deleteClient(client.id)
           .then(() => {
-            // On vide les filtres de tri du tableau
-            Object.keys(this.$refs['clients']._data.filters).forEach(
-              e => (this.$refs['clients']._data.filters[e] = '')
-            )
             this.getClients()
             this.$store.dispatch('addNotificationSuccessDelete')
           })
@@ -212,6 +217,7 @@ export default {
       }
     },
     openDetails(row) {
+      this.saveFilters(this.$refs['clients'].filters)
       if (row.avatarId) {
         AvatarService.getAvatar(row.avatarId).then(response => {
           this.avatar = 'data:image;base64,' + btoa(response.data.image)
@@ -219,6 +225,7 @@ export default {
       }
     },
     goToAdd() {
+      this.saveFilters(this.$refs['clients'].filters)
       this.$router.push({ name: 'ClientAjout' })
     },
     exporter() {
@@ -274,6 +281,18 @@ export default {
     },
     setAdresseLabel(adresse) {
       return AdresseService.setAdresseLabel(adresse)
+    },
+    saveFilters(filter) {
+      if (filter) {
+        this.$store.commit('SAVE_FILTERS', {
+          id: 'clients',
+          filters: filter
+        })
+      }
+    },
+    emptyFilter() {
+      this.$refs['clients'].filters = {}
+      this.$store.commit('DELETE_FILTERS', 'clients')
     }
   },
   created() {

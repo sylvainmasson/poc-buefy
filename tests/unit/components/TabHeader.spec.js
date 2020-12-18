@@ -42,6 +42,28 @@ describe('FormFooter', () => {
     expect(wrapper.find('[data-testid="button-add"]').exists()).toBe(false)
   })
 
+  it('Should render empty filter button, if isEmptyFilter', () => {
+    const wrapper = shallowMount(TabHeader, {
+      propsData: {
+        title: title,
+        isEmptyFilter: true
+      },
+      localVue
+    })
+    expect(wrapper.find('[data-testid="button-empty-filter"]').exists()).toBe(true)
+  })
+
+  it('Should not render empty filter button, if not isEmptyFilter', () => {
+    const wrapper = shallowMount(TabHeader, {
+      propsData: {
+        title: title,
+        isEmptyFilter: false
+      },
+      localVue
+    })
+    expect(wrapper.find('[data-testid="button-empty-filter"]').exists()).toBe(false)
+  })
+
   it('Should render export button, if isExportable', () => {
     const wrapper = shallowMount(TabHeader, {
       propsData: {

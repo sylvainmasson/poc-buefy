@@ -15,6 +15,15 @@
         data-testid="button-add"
       />
       <base-button
+        title="Reinitialiser les filtres"
+        libelle="Vider les filtres"
+        type="is-primary"
+        icon-left="refresh"
+        v-if="isEmptyFilter"
+        @click="$emit('click-empty-filter')"
+        data-testid="button-empty-filter"
+      />
+      <base-button
         type="is-info"
         icon-left="file"
         title="Exporter en CSV"
@@ -39,7 +48,8 @@ export default {
       required: true
     },
     isAdd: Boolean,
-    isExportable: Boolean
+    isExportable: Boolean,
+    isEmptyFilter: Boolean
   },
   components: {
     BaseButton
