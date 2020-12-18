@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import user from '@/store/modules/user'
 import pagination from '@/store/modules/pagination'
+import filter from '@/store/modules/filter'
 import alert from '@/store/modules/alert'
 import VuexPersistence from 'vuex-persist'
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   modules: {
     user,
     pagination,
+    filter,
     alert
   },
   mutations: {
