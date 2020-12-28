@@ -5,7 +5,7 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Buefy from 'buefy'
-// import '@mdi/font/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.css'
 import './assets/scss/app.scss'
 import { VueEditor } from 'vue2-editor'
 
