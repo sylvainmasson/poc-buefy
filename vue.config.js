@@ -7,5 +7,11 @@ module.exports = {
       errors: true
     }
   },
-  assetsDir: 'static'
+  assetsDir: 'static',
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      args[0].title = 'Poc buefy'
+      return args
+    })
+  }
 }
