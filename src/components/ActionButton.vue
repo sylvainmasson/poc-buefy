@@ -18,6 +18,14 @@
       data-testid="button-modify"
     />
     <base-button
+      type="is-info is-small"
+      icon-right="content-paste"
+      title="Dupliquer"
+      v-if="isDuplicable"
+      @click.native="$emit('click-duplicate')"
+      data-testid="button-duplicate"
+    />
+    <base-button
       type="is-danger is-small"
       icon-right="delete"
       title="Supprimer"
@@ -37,6 +45,7 @@ export default {
   props: {
     isReadable: Boolean,
     isEditable: Boolean,
+    isDuplicable: Boolean,
     isDeletable: Boolean,
     libelle: {
       type: String,

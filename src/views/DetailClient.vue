@@ -104,7 +104,7 @@ export default {
       }
     }
   },
-  props: { id: { type: String } },
+  props: { id: { type: Number } },
   methods: {
     getAvatar(id) {
       AvatarService.getAvatar(id)

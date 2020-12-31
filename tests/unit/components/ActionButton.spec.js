@@ -64,6 +64,35 @@ describe('ActionButton.vue, modification', () => {
   })
 })
 
+describe('ActionButton.vue, duplication', () => {
+  it('Should render button duplicate, if isDuplicable true', () => {
+    const wrapper = shallowMount(ActionButton, {
+      propsData: {
+        isDuplicable: true
+      },
+      localVue
+    })
+    expect(wrapper.find('[data-testid="button-duplicate"]').isVisible()).toBe(true)
+  })
+
+  it('Should emmit click-duplicate, if button duplicate is clicked', () => {
+    const wrapper = shallowMount(ActionButton, {
+      propsData: {
+        isDuplicable: true
+      },
+      localVue
+    })
+    wrapper.find('[data-testid="button-duplicate"]').trigger('click')
+    const clickRead = wrapper.emitted('click-duplicate')
+    expect(clickRead).toHaveLength(1)
+  })
+
+  it('Should not render button duplicate, if isDuplicable false', () => {
+    const wrapper = shallowMount(ActionButton, { localVue })
+    expect(wrapper.find('[data-testid="button-duplicate"]').exists()).toBe(false)
+  })
+})
+
 describe('ActionButton.vue, suppression', () => {
   it('Should render button delete, if isDeletable true', () => {
     const wrapper = shallowMount(ActionButton, {

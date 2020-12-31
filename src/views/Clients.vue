@@ -71,9 +71,11 @@
             <action-button
               is-readable
               is-editable
+              is-duplicable
               is-deletable
               @click-read="goToRead(props.row.id)"
               @click-edit="goToEdit(props.row.id)"
+              @click-duplicate="goToDuplicate(props.row.id)"
               @click-delete="remove(props.row)"
               :libelle="getNomComplet(props.row)"
             />
@@ -201,6 +203,15 @@ export default {
       this.saveFilters(this.$refs[this.id].filters)
       if (id) {
         this.$router.push({ name: 'ClientModification', params: { id } })
+      }
+    },
+    goToDuplicate(id) {
+      this.saveFilters(this.$refs[this.id].filters)
+      if (id) {
+        this.$router.push({
+          name: 'ClientDuplication',
+          params: { id: id, mode: 'dupliquer' }
+        })
       }
     },
     remove(client) {
