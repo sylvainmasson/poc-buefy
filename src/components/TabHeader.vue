@@ -22,6 +22,7 @@
         v-if="isEmptyFilter"
         @click="$emit('click-empty-filter')"
         data-testid="button-empty-filter"
+        class="is-hidden-mobile"
       />
       <base-button
         type="is-info"

@@ -71,9 +71,11 @@
             <action-button
               is-readable
               is-editable
+              is-duplicable
               is-deletable
               @click-read="goToRead(props.row.id)"
               @click-edit="goToEdit(props.row.id)"
+              @click-duplicate="goToDuplicate(props.row.id)"
               @click-delete="remove(props.row)"
               :libelle="getNomComplet(props.row)"
             />
@@ -179,9 +181,9 @@ export default {
           }
           this.isLoading = false
           // Récupération des filtres
-          this.$refs[
-            'clients'
-          ]._data.filters = this.$store.getters.getFilterById(this.id)
+          this.$refs[this.id]._data.filters = this.$store.getters.getFilterById(
+            this.id
+          )
         })
         .catch(e => {
           this.$store.dispatch('addNotificationError', e.response.data)
@@ -192,19 +194,28 @@ export default {
       return `${client.prenom} ${client.nom}`
     },
     goToRead(id) {
-      this.saveFilters(this.$refs['clients'].filters)
+      this.saveFilters(this.$refs[this.id].filters)
       if (id) {
         this.$router.push({ name: 'ClientDetail', params: { id } })
       }
     },
     goToEdit(id) {
-      this.saveFilters(this.$refs['clients'].filters)
+      this.saveFilters(this.$refs[this.id].filters)
       if (id) {
         this.$router.push({ name: 'ClientModification', params: { id } })
       }
     },
+    goToDuplicate(id) {
+      this.saveFilters(this.$refs[this.id].filters)
+      if (id) {
+        this.$router.push({
+          name: 'ClientDuplication',
+          params: { id: id, mode: 'dupliquer' }
+        })
+      }
+    },
     remove(client) {
-      this.saveFilters(this.$refs['clients'].filters)
+      this.saveFilters(this.$refs[this.id].filters)
       if (client) {
         ClientService.deleteClient(client.id)
           .then(() => {
@@ -217,7 +228,7 @@ export default {
       }
     },
     openDetails(row) {
-      this.saveFilters(this.$refs['clients'].filters)
+      this.saveFilters(this.$refs[this.id].filters)
       if (row.avatarId) {
         AvatarService.getAvatar(row.avatarId).then(response => {
           this.avatar = 'data:image;base64,' + btoa(response.data.image)
@@ -225,7 +236,7 @@ export default {
       }
     },
     goToAdd() {
-      this.saveFilters(this.$refs['clients'].filters)
+      this.saveFilters(this.$refs[this.id].filters)
       this.$router.push({ name: 'ClientAjout' })
     },
     exporter() {
@@ -285,14 +296,14 @@ export default {
     saveFilters(filter) {
       if (filter) {
         this.$store.commit('SAVE_FILTERS', {
-          id: 'clients',
+          id: this.id,
           filters: filter
         })
       }
     },
     emptyFilter() {
-      this.$refs['clients'].filters = {}
-      this.$store.commit('DELETE_FILTERS', 'clients')
+      this.$refs[this.id].filters = {}
+      this.$store.commit('DELETE_FILTERS', this.id)
     }
   },
   created() {

@@ -18,9 +18,10 @@ Element important de nos applications, le composant **Table** de `Buefy` qui a �
 
 - Présenter un en-tête avec le titre du tableau et des boutons d'actions configurables à droite dont l'ajout et l'exportation des données en CSV.
 - Présenter un tableau filtrable, triable avec la possibilité d'avoir un détail sur chaque ligne.
-- Avoir des boutons de consultation, modification, suppression sur chaque ligne avec la possibilité d'ajouter des actions particulières grâce à des slots.
+- Avoir des boutons de consultation, modification, duplication, suppression sur chaque ligne avec la possibilité d'ajouter des actions particulières grâce à des slots.
 - La gestion de la suppression avec un message d'alerte.
 - Avoir ou non une pagination, une pagination simple et choisir le nombre d'items par page.
+- Sauvegarde des filtres et possibilité de les réinitialiser.
 - De présenter une vue mobile où chaque ligne est une carte. Les fonctionnalités de tri et de pagination reste disponible.
 
 **Affichage desktop**
@@ -31,9 +32,9 @@ Element important de nos applications, le composant **Table** de `Buefy` qui a �
 
 <img :src="$withBase('/assets/img/table_mobile.png')" alt="Table mobile">
 
-## Ajout / Modification d'un enregistrement
+## Ajout / Modification / Duplication d'un enregistrement
 
-L'application permet d'ajouter ou de modifier un client.
+L'application permet d'ajouter, de modifier ou de dupliquer un client.
 La validation de formulaire se fait en html5 natif avec affichage de message d'erreur sur sortie de champ. La gestion de la validation et le format des messages d'erreurs est donc géré par le navigateur lui même.
 
 Dans cet écran, on gère les formats de champs suivants :

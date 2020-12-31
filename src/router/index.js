@@ -33,6 +33,15 @@ const routes = [
     props: true
   },
   {
+    path: '/clients/fiche/:id/:mode',
+    name: 'ClientDuplication',
+    component: () =>
+      import(
+        /* webpackChunkName: "clientModification" */ '../views/FicheClient.vue'
+      ),
+    props: true
+  },
+  {
     path: '/clients/detail/:id',
     name: 'ClientDetail',
     component: () =>

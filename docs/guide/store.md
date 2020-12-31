@@ -196,6 +196,52 @@ this.$store.dispatch('addNotificationError', 'Message erreur')
 this.$store.dispatch('addNotificationWarning', 'Message avertissement')
 ```
 
+## Filter
+
+Ce module permet de gérer et de sauvegarder les filtres d'en-tête de colonne pour chaque tableau de l'application.
+
+Voici les éléments qui sont stockés par pagination de tableau :
+
+- `id` : identifiant du tableau de filtres
+- `filters` : objet composé d'attributs comprenant chaque filtre
+
+Chaque collection de filtres est stockée de la manière suivante dans un tableau avec pour chacune un attribut `id` qui permet de la retrouver :
+
+```json
+"filters": [
+  {
+  "id": "clients",
+  "filters": {
+    "nom": "adam",
+    "prenom": "leo",
+    "entreprise.libelle" : "inserim"
+  }
+]
+```
+
+### Comportement
+
+- Lors de l'enregistrement d'une collection de filtres :
+  - Si elle n'existe pas, elle est crée
+  - Si elle existe, elle est mise à jour
+
+### Utilisation
+
+**Récupération des filtres pour un tableau**
+
+```javascript
+this.$store.getters.getFilterById(this.id)
+```
+
+**Enregistrement des filtres pour un tableau**
+
+```javascript
+this.$store.commit('SAVE_FILTERS', {
+  id: this.id,
+  filters: this.$refs[this.id].filters
+})
+```
+
 ## Pagination
 
 Ce module permet de gérer et de sauvegarder le comportement de la pagination pour chaque tableau de l'application.
@@ -206,7 +252,7 @@ Voici les éléments qui sont stockés par pagination de tableau :
 - Pagination simple ou non `isSimplePagination`
 - Nombre d'éléments par page `perPage`
 
-Chaque pagination est stockée de la manière suivante dans un tableau avec pour chacune un attribut `id` qui permet de la retrouver :
+Chaque pagination est stockée de la manière suivante dans un tableau avec pour chacun un attribut `id` qui permet de la retrouver :
 
 ```json
 "paginations": [

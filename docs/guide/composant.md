@@ -142,6 +142,10 @@ Avec utilisation du slot par défaut
 
 ::::
 
+::: tip Note
+Le libellé du bouton est caché en version mobile. Seul l'icône persiste.
+:::
+
 ## En tête de tableau
 
 Ce composant nommé 'TabHeader` permet de gérer les en-têtes de tableau.
@@ -149,9 +153,11 @@ Ce composant nommé 'TabHeader` permet de gérer les en-têtes de tableau.
 Par défaut, il permet d'afficher 2 boutons :
 
 - **Ajouter** pour naviguer ver la page d'ajout d'un composant
+- **Vider les filtres** pour effacer les filtres sauvegardés
 - **Exporter** pour déclencher l'export CSV
 
-Ces 2 boutons peuvent être cachés.
+Ces 3 boutons peuvent être cachés.
+Le bouton **Vider les filtres** est cachée en mobile car les filtres d'en-tête de colonne ne sont pas visibles en mobile.
 
 On peut ajouter aussi des boutons avant et après avec 2 slots `before` et `after`.
 
@@ -168,20 +174,22 @@ On peut ajouter aussi des boutons avant et après avec 2 slots `before` et `afte
 
 ::: tab Propriétés
 
-| Nom          | Description                         | Type                 | Obligatoire | Valeur par Défaut |
-| ------------ | ----------------------------------- | -------------------- | ----------- | ----------------- |
-| title        | Titre de l'en-tête                  | Chaîne de caractères | Oui         |                   |
-| isAdd        | Affichage ou non du bouton d'ajout  | Booléen              | Non         |                   |
-| isExportable | Affichage ou non du bouton d'export | Booléen              | Non         |                   |
+| Nom             | Description                                       | Type                 | Obligatoire | Valeur par Défaut |
+| --------------- | ------------------------------------------------- | -------------------- | ----------- | ----------------- |
+| title           | Titre de l'en-tête                                | Chaîne de caractères | Oui         |                   |
+| is-add          | Affichage ou non du bouton d'ajout                | Booléen              | Non         |                   |
+| is-empty-filter | Affichage ou non du bouton pour vider les filtres | Booléen              | Non         |                   |
+| is-exportable   | Affichage ou non du bouton d'export               | Booléen              | Non         |                   |
 
 :::
 
 ::: tab Évènements
 
-| Nom          | Description                            |
-| ------------ | -------------------------------------- |
-| click-add    | Déclenché sur le clic du bouton ajout  |
-| click-export | Déclenché sur le clic du bouton export |
+| Nom                | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| click-add          | Déclenché sur le clic du bouton ajout             |
+| click-empty-filter | Déclenché sur le clic du bouton vider les filtres |
+| click-export       | Déclenché sur le clic du bouton export            |
 
 :::
 
@@ -195,6 +203,10 @@ On peut ajouter aussi des boutons avant et après avec 2 slots `before` et `afte
 :::
 
 ::::
+
+::: tip Note
+La sauvegarde des filtres dans le store se fait lors d'un clic sur un bouton de l'utilisateur. Il faut alors sur cet évènement déclenché la sauvegarde des filtres dans le store
+:::
 
 ## Résultat vide
 
@@ -221,22 +233,24 @@ Des boutons peuvent être ajoutés avant ou après ces boutons via des slots. Le
 
 ::: tab Propriétés
 
-| Nom         | Description                                | Type                 | Obligatoire | Valeur par Défaut |
-| ----------- | ------------------------------------------ | -------------------- | ----------- | ----------------- |
-| libelle     | Libellé à afficher lors de la suppression  | Chaîne de caractères | Oui         |                   |
-| isReadable  | Affichage ou non du bouton de consultation | Booléen              | Non         |                   |
-| isEditable  | Affichage ou non du bouton de modification | Booléen              | Non         |                   |
-| isDeletable | Affichage ou non du bouton de suppression  | Booléen              | Non         |                   |
+| Nom           | Description                                | Type                 | Obligatoire | Valeur par Défaut |
+| ------------- | ------------------------------------------ | -------------------- | ----------- | ----------------- |
+| libelle       | Libellé à afficher lors de la suppression  | Chaîne de caractères | Oui         |                   |
+| is-readable   | Affichage ou non du bouton de consultation | Booléen              | Non         |                   |
+| is-editable   | Affichage ou non du bouton de modification | Booléen              | Non         |                   |
+| is-duplicable | Affichage ou non du bouton de duplication  | Booléen              | Non         |                   |
+| is-deletable  | Affichage ou non du bouton de suppression  | Booléen              | Non         |                   |
 
 :::
 
 ::: tab Évènements
 
-| Nom          | Description                                  |
-| ------------ | -------------------------------------------- |
-| click-read   | Déclenché sur le clic du bouton consultation |
-| click-edit   | Déclenché sur le clic du bouton modification |
-| click-remove | Déclenché sur la confirmation de suppression |
+| Nom             | Description                                  |
+| --------------- | -------------------------------------------- |
+| click-read      | Déclenché sur le clic du bouton consultation |
+| click-edit      | Déclenché sur le clic du bouton modification |
+| click-duplicate | Déclenché sur le clic du bouton duplication  |
+| click-remove    | Déclenché sur la confirmation de suppression |
 
 :::
 

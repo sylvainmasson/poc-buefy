@@ -170,14 +170,14 @@ export default {
       }
     }
   },
-  props: { id: { type: String } },
+  props: { id: { type: Number }, mode: { type: String } },
   methods: {
     getClient(id) {
+      console.log(this.mode)
       ClientService.getClient(id)
         .then(response => {
           this.client = response.data
           this.libelleEnTete = `${this.client.prenom} ${this.client.nom}`
-          this.modification = true
           if (this.client.avatarId || this.client.avatarUrl) {
             this.boutonAvatar = "Mettre à jour l'avatar"
           }
@@ -187,6 +187,13 @@ export default {
           }
           if (this.client.entreprise) {
             this.libelleEntreprise = this.client.entreprise.libelle
+          }
+          // Vérification si on est en duplication
+          if (this.mode && this.mode === 'dupliquer') {
+            // Attributs à réinitialiser pour la duplication
+            this.client.id = null
+          } else {
+            this.modification = true
           }
         })
         .catch(e => {
