@@ -16,16 +16,27 @@ module.exports = {
       errors: true
     }
   },
-  assetsDir: 'static'
+  assetsDir: 'static',
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      args[0].title = 'Poc buefy'
+      return args
+    })
+  }
 }
 ```
 
-4 choses sont effectuées dans ce fichier :
+5 choses sont effectuées dans ce fichier :
 
 - Ajouter un proxy vers notre API Rest sur `http://localhost:3000` pour rediriger vers `http://localhost:8081/` pour éviter les problèmes de **CORS** en développement.
 - Fixer le port de l'application à **8081** pour éviter les collisions avec **Tomcat** qui démarre sur le port **8080** sur nos applications métiers.
 - Forcer l'affichage des erreurs en surimpression sur le navigateur en développement. Ainsi le développeur est obligé de les corriger si il veut continuer à travailler.
 - Générer les fichiers statiques js, css, images, fonts dans un répertoire `static` plutôt qu'à la racine.
+- Définition du titre de l'application réutilisée dans le fichier `index.html` :
+
+```html
+<title><%= htmlWebpackPlugin.options.title %></title>
+```
 
 ## Configuration lint Prettier
 
